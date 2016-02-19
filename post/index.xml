@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Connected Displays</title>
-    <link>http://connected-displays.com/post/</link>
+    <link>http://www.connected-displays.com/post/</link>
     <description>Recent content in Posts on Connected Displays</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 04 Jan 2016 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://connected-displays.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://www.connected-displays.com/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>ESP8266 Weather Display</title>
-      <link>http://connected-displays.com/post/esp8266-weather-display/</link>
+      <link>http://www.connected-displays.com/post/esp8266-weather-display/</link>
       <pubDate>Mon, 04 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://connected-displays.com/post/esp8266-weather-display/</guid>
+      <guid>http://www.connected-displays.com/post/esp8266-weather-display/</guid>
       <description>
 
 &lt;p&gt;I came across a tutorial in the Adafruit Learning System about a &lt;a href=&#34;https://learn.adafruit.com/huzzah-weather-display/&#34;&gt;WiFi-connected Weather Display&lt;/a&gt; that caught my eye.&lt;/p&gt;
@@ -61,10 +61,10 @@
     
     <item>
       <title>Smart Stickers Product Preview</title>
-      <link>http://connected-displays.com/post/smart-stickers-product-preview/</link>
+      <link>http://www.connected-displays.com/post/smart-stickers-product-preview/</link>
       <pubDate>Thu, 10 Dec 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://connected-displays.com/post/smart-stickers-product-preview/</guid>
+      <guid>http://www.connected-displays.com/post/smart-stickers-product-preview/</guid>
       <description>
 
 &lt;p&gt;There’s an &lt;a href=&#34;https://www.indiegogo.com/projects/smart-sticker-customizable-real-time-display#/story&#34;&gt;Indiegogo campaign&lt;/a&gt; running for Smart Stickers - low cost bluetooth connected E-ink displays.  The product looks interesting, and I want this to become a real product, but I have some serious doubts about the campaign.&lt;/p&gt;
@@ -129,10 +129,10 @@
     
     <item>
       <title>MoodLight Product Preview</title>
-      <link>http://connected-displays.com/post/moodlight-product-preview/</link>
+      <link>http://www.connected-displays.com/post/moodlight-product-preview/</link>
       <pubDate>Fri, 04 Dec 2015 12:22:39 -0500</pubDate>
       
-      <guid>http://connected-displays.com/post/moodlight-product-preview/</guid>
+      <guid>http://www.connected-displays.com/post/moodlight-product-preview/</guid>
       <description>
 
 &lt;p&gt;Connor Nishijima created an online service that monitors Twitter for people expressing their emotions, and is in the middle of a &lt;a href=&#34;https://www.kickstarter.com/projects/connornishijima/moodlight-a-wifi-enabled-window-to-the-worlds-emot&#34;&gt;Kickstarter campaign&lt;/a&gt; to show that data on a WiFi connected display.&lt;/p&gt;
@@ -185,10 +185,10 @@
     
     <item>
       <title>Lametric Time - Initial Review</title>
-      <link>http://connected-displays.com/post/lametric-time-initial-review/</link>
+      <link>http://www.connected-displays.com/post/lametric-time-initial-review/</link>
       <pubDate>Sun, 15 Nov 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://connected-displays.com/post/lametric-time-initial-review/</guid>
+      <guid>http://www.connected-displays.com/post/lametric-time-initial-review/</guid>
       <description>
 
 &lt;p&gt;I was excited to learn about the LaMetric Time when it launched on Kickstarter in July 2014.  I was lucky enough to be an early backer at the $119 price for a plug-in LaMetric (no battery), and I just opened it up and spent about an hour playing with it.&lt;/p&gt;
@@ -270,10 +270,10 @@
     
     <item>
       <title>Raincheck Product Preview</title>
-      <link>http://connected-displays.com/post/raincheck-product-preview/</link>
+      <link>http://www.connected-displays.com/post/raincheck-product-preview/</link>
       <pubDate>Sun, 01 Nov 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://connected-displays.com/post/raincheck-product-preview/</guid>
+      <guid>http://www.connected-displays.com/post/raincheck-product-preview/</guid>
       <description>
 
 &lt;p&gt;Raincheck is an umbrella stand that knows if it&amp;rsquo;s going to rain.  It has a WiFi connected LED display to show you the chance of precipitation in the next eight hours, built into a beautiful hand-crafted umbrella stand.&lt;/p&gt;
