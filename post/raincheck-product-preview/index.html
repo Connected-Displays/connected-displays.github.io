@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Connected Displays</title>
+
+    
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="/css/blog-home.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    
+    
+    
+
+    
+
+</head>
+
+<body>
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Connected Displays</a>
+            </div>
+            
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+
+                
+                
+                    <li>
+
+                        <a href="mailto:hello@connected-displays.com"
+                         title="Send an email">
+
+                        
+                            <i class="fa fa-envelope"></i>
+                        
+                        
+                        Contact
+                        </a>
+                    </li>
+                
+                    <li>
+
+                        <a href="http://feeds.connected-displays.com"
+                        >
+
+                        
+                            <i class="fa fa-rss"></i>
+                        
+                        
+                        RSS
+                        </a>
+                    </li>
+                
+                </ul>
+            </div>
+            
+        </div>
+        
+    </nav>
+
+
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-8">
+
+                <h1>Raincheck Product Preview</h1>
+                <hr>
+                <p><span class="glyphicon glyphicon-time"></span> 
+                Posted on Sun, Nov 1, 2015</p>
+                <hr>
+                
+                <div class="post">
+                    
+
+<p>Raincheck is an umbrella stand that knows if it&rsquo;s going to rain.  It has a WiFi connected LED display to show you the chance of precipitation in the next eight hours, built into a beautiful hand-crafted umbrella stand.</p>
+
+<iframe width="640" height="480" src="https://www.kickstarter.com/projects/1314258106/raincheck/widget/video.html" frameborder="0" scrolling="no"> </iframe>
+
+<p>I had just finished my first <a href="https://www.particle.io/prototype#photon">Particle Photon</a> project - an indicator to tell if it’s going to rain in the next four hours - when I saw Raincheck in my twitter feed.  I thought it was interesting as Raincheck integrates simple electronics in a well-designed hand-crafted enclosure.</p>
+
+<h2 id="hardware:d680e8a854a7cbad6d490c445cba2eba">Hardware</h2>
+
+<p>Raincheck was initially prototyped with a Raspberry Pi, but is now going to be built with the Particle Photon.  It looks like the LEDs are a strip of WS2812 LEDs (aka NeoPixels).  To drive LEDs continuously it will need to be plugged into the wall, and photos in the press kit show what looks like a 5VDC power supply.</p>
+
+<p><img src="DSCF0539.jpg" alt="" /></p>
+
+<p>Sometimes projects like these are powered through USB.  The max current draw of eight WS2812s is 480mA, so it&rsquo;s going to be just above the 500mA limit for a standard USB port once you add in the Photon&rsquo;s current draw, though the LEDs can and probably are going to be dimmed.</p>
+
+<h3 id="enclosure:d680e8a854a7cbad6d490c445cba2eba">Enclosure</h3>
+
+<p>The main part of Raincheck is the stand itself, designed and hand-crafted by Nick Jonas.  I have no experience with wood working, but it looks like a lot of thought has gone into the design from the appearance, to protecting the inside from the water, and weighting the stand so it stays upright.  The electronics need to be both at the bottom of the stand to connect power, and the side of the stand where the LEDs are.  A model of the prototype shows a channel in the wood for the LED strip and wires, and a photo shows how there was space left in the bottom to mount the rest of the electronics and a panel-mount power jack.</p>
+
+<p><img src="comparison.jpg" alt="" /></p>
+
+<p>Compare the unfinished look of the breadboard prototype to the LEDs installed in the stand.  The stand does a great job of hiding the messy electronics behind a beautiful object.  The stand isn&rsquo;t cheap - $299 retail price with a $50 discount for early Kickstarter backers - and likely most of the money is going toward the stand.  The cost of the electronics are probably under $50 buying in low volumes from a US shop like Adafruit, and there&rsquo;s labor involved in assembling them.  I have no idea what the materials cost, and how much one would normally pay for a hand-crafted stand like this - there&rsquo;s nothing to easily compare with online.</p>
+
+<p>Ideally, the lights in the stand shouldn&rsquo;t draw your attention until you need the information and it should be available at a glance.  Without seeing the stand in person it&rsquo;s hard to judge, but I have some concerns about the lights being distracting.  The LEDs blink blue or white - very intense colors - when there is rain or snow in the forecast.  It doesn&rsquo;t appear that the LEDs are diffused, and they may be quite bright if looked at straight on.  This is a minor concern as they are low to the ground, but they also might cast light against a nearby wall, lighting up the room at night even if they are dim.</p>
+
+<h3 id="hiding-the-photon-in-an-enclosure:d680e8a854a7cbad6d490c445cba2eba">Hiding the Photon in an Enclosure</h3>
+
+<p>To meet the Particle <a href="https://docs.particle.io/guide/how-to-build-a-product/pcb-design/#hardware-design-requirements">Hardware Design Requirements</a>, the device must expose the RGB LED and a button to enter setup mode to the user.  On a finished product like this, exposing part of the Photon to make the button user-accessible is risky, especially on the bottom which end up damp (not from the stand leaking water from the umbrella, but from wet rain boots sitting next to the stand).  This hand-crafted product won&rsquo;t have the volume to justify a completely custom PCB using a Particle P0 or P1 module and will likely be using the Photon directly.  The Photon has pads on the back to bring out the signals for an external Setup button and RGB LED, so it&rsquo;s possible to protect the Photon by hiding it deeper in an enclosure, while still giving the user access to setup the Photon.</p>
+
+<h2 id="software:d680e8a854a7cbad6d490c445cba2eba">Software</h2>
+
+<p>Raincheck connects to WiFi, and is configured through an iOS or Android App.  It pulls weather data from the <a href="https://developer.forecast.io/">Forecast.io API</a> every fifteen minutes.</p>
+
+<h3 id="api:d680e8a854a7cbad6d490c445cba2eba">API</h3>
+
+<p>Why is the forecast updated only every fifteen minutes?  (In my Photon rain project I updated every two minutes.)  Probably because once you get past the Forecast.io’s free 1,000 API requests per day, each request costs money: $0.0001 ea.  That&rsquo;s about $3.50 per year per stand, while updating every 2 minutes for example would cost over $26 per year.  There&rsquo;s no subscription fee for the stand, so these costs have to be built into the price.</p>
+
+<h3 id="app:d680e8a854a7cbad6d490c445cba2eba">App</h3>
+
+<p>The stand must be configured through a smartphone app.  This seems reasonable as smartphones are so common now, and Particle makes it easy to configure the Photon through an app.  For custom products, Particle has mobile SDKs and example apps, that are supposed to make it easier for developers.  This product needs at least a simple custom app for setting up WiFi credentials and sending your location to the Photon.</p>
+
+<h2 id="conclusion:d680e8a854a7cbad6d490c445cba2eba">Conclusion</h2>
+
+<p>Raincheck looks like a well designed product, though at the price point seems only accessible to someone who is willing to pay the premium for a hand-crafted product.  This is reasonable as Nick is hand making these on the side, and the goal of the project seems more about creating a high-quality product and releasing it to the world than to manufacture a ton of products and create a full-time business.  I wish Nick luck with the Kickstarter and hope to see future product designs combining hand-crafted objects with glanceable information.</p>
+
+                </div>
+                <hr>
+
+            </div>
+
+            
+            <div class="col-md-4">
+                
+<link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+     
+     
+</style>
+<div id="mc_embed_signup" class="well">
+<form action="//pixelmatix.us8.list-manage.com/subscribe/post?u=aae3d71a06e588315ef49efd3&amp;id=6de8c12496" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll" class="input-group">
+    <label for="mce-EMAIL">Subscribe to our mailing list</label>
+    <input type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="email address" required>
+    
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_aae3d71a06e588315ef49efd3_6de8c12496" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default"></div>
+    </div>
+</form>
+</div>
+
+
+
+                
+
+                
+
+            </div>
+
+        </div>
+        
+
+        <hr>
+
+                <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &#xA9; 2016 Pixelmatix. All Rights Reserved.</p>
+                </div>
+                
+            </div>
+            
+        </footer>
+
+ 
+     </div>
+     
+    
+    <script src="/js/jquery.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
+

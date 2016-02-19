@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Connected Displays</title>
+
+    
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="/css/blog-home.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    
+    
+    
+
+    
+
+</head>
+
+<body>
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Connected Displays</a>
+            </div>
+            
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+
+                
+                
+                    <li>
+
+                        <a href="mailto:hello@connected-displays.com"
+                         title="Send an email">
+
+                        
+                            <i class="fa fa-envelope"></i>
+                        
+                        
+                        Contact
+                        </a>
+                    </li>
+                
+                    <li>
+
+                        <a href="http://feeds.connected-displays.com"
+                        >
+
+                        
+                            <i class="fa fa-rss"></i>
+                        
+                        
+                        RSS
+                        </a>
+                    </li>
+                
+                </ul>
+            </div>
+            
+        </div>
+        
+    </nav>
+
+
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-8">
+
+                <h1>MoodLight Product Preview</h1>
+                <hr>
+                <p><span class="glyphicon glyphicon-time"></span> 
+                Posted on Fri, Dec 4, 2015</p>
+                <hr>
+                
+                <div class="post">
+                    
+
+<p>Connor Nishijima created an online service that monitors Twitter for people expressing their emotions, and is in the middle of a <a href="https://www.kickstarter.com/projects/connornishijima/moodlight-a-wifi-enabled-window-to-the-worlds-emot">Kickstarter campaign</a> to show that data on a WiFi connected display.</p>
+
+<iframe width="640" height="480" src="https://www.kickstarter.com/projects/connornishijima/moodlight-a-wifi-enabled-window-to-the-worlds-emot/widget/video.html" frameborder="0" scrolling="no"> </iframe>
+
+<p>The twitter data is analyzed by a server, and you can see it working on the <a href="http://moodlighting.co/stats/">MoodLighting Stats page</a>.  The display polls the server for new data every second, and lights up nine LEDs to display the current state of emotions.  The light appears to fade between different shades as emotions gradually change, but also can flash to get your attention if a sudden change in emotions is detected.</p>
+
+<h2 id="hardware:d680e8a854a7cbad6d490c445cba2eba">Hardware</h2>
+
+<p>The project uses the popular ESP8266 module for connecting to WiFi, but most of the code is running on an ATmega328P, the same chip that&rsquo;s on an Arduino Uno.</p>
+
+<p><img src="hardware.jpg" alt="" /></p>
+
+<p>The electronics are enclosed in a laser cut birch veneer enclosure, with options to buy the display fully assembled, or as a cheaper unassembled version that you can glue together yourself.  The LEDs are diffused through a sheet of what looks like frosted acrylic, that creates a blending effect for the LEDs, which is more pleasant to look at than bare LEDs and is well suited for a display showing ambient information.</p>
+
+<h2 id="software:d680e8a854a7cbad6d490c445cba2eba">Software</h2>
+
+<p>Most of the intelligence is in the cloud, keeping the firmware simple so it doesn&rsquo;t need to be changed if Twitter updates its API, or MoodLighting improves its mood data analysis.</p>
+
+<h2 id="likes:d680e8a854a7cbad6d490c445cba2eba">Likes</h2>
+
+<p>I like that the project leverages code on an online server to do the heavy lifting of analyzing data, which simplifies the firmware running on the display and reduces data usage.</p>
+
+<p>The diffused LEDs are good choice for representing data without being distracting, but the display also implements a flashing mode to grab attention when needed.</p>
+
+<p><img src="isoview.jpg" alt="" /></p>
+
+<p>The project is open source - the firmware, PCB design, and mechanical details for the enclosure are posted on GitHub as of the start of the campaign - though it&rsquo;s unclear what license the code and drawings are shared with.</p>
+
+<p>Connor has thought about alternate uses for the display beyond displaying mood data.  You can program it yourself with user-friendly <a href="http://ifttt.com">IFTTT</a>, or you can bypass the cloud completely by using local UDP messages.</p>
+
+<h2 id="concerns:d680e8a854a7cbad6d490c445cba2eba">Concerns</h2>
+
+<p>The project&rsquo;s funding goals are very low, and the product doesn&rsquo;t seem heavily marked up, which means there isn&rsquo;t a lot of money left over after fulfilling the Kickstarter rewards.  One of the stretch goals that has already been met is to create a cross-platform app for the display, which could be a significant expense.</p>
+
+<p>It&rsquo;s not clear if there is a plan to be able to update the firmware either remotely or over USB, even after I looked at the firmware for both the main microcontroller and the wifi module.  It appears that other than the advanced use of sending local packets over UDP, data for the display need to come through the &ldquo;www.moodlighting.co&rdquo; server, so the functionality of the device depends on the server being maintained.</p>
+
+<h2 id="suggestions-for-the-next-version:d680e8a854a7cbad6d490c445cba2eba">Suggestions for the Next Version</h2>
+
+<p>I&rsquo;d like to see an option to customize the feeds that are monitored for mood, to show only twitter accounts you&rsquo;re following for example.  If that&rsquo;s too complicated, maybe there could be an option to show only certain groups on twitter, e.g. by region, language, or type of twitter user.</p>
+
+<p>For users that just want an ambient information display, and not notifications, an option to turn off the flashing notification would be nice.</p>
+
+<p>The LED fading looks pretty good in the video, but I&rsquo;d love to see what it could look like if it were using <a href="http://fastled.io">FastLED</a> and some of the code shared in <a href="http://fastled.io/+">their community</a> instead of the basic Adafruit NeoPixel library.</p>
+
+<p><a href="http://hackaday.com/2015/10/12/internet-connected-box-displays-emotion-basement-dwellers-still-unaffected">via Hackaday</a></p>
+
+                </div>
+                <hr>
+
+            </div>
+
+            
+            <div class="col-md-4">
+                
+<link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+     
+     
+</style>
+<div id="mc_embed_signup" class="well">
+<form action="//pixelmatix.us8.list-manage.com/subscribe/post?u=aae3d71a06e588315ef49efd3&amp;id=6de8c12496" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll" class="input-group">
+    <label for="mce-EMAIL">Subscribe to our mailing list</label>
+    <input type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="email address" required>
+    
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_aae3d71a06e588315ef49efd3_6de8c12496" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default"></div>
+    </div>
+</form>
+</div>
+
+
+
+                
+
+                
+
+            </div>
+
+        </div>
+        
+
+        <hr>
+
+                <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &#xA9; 2016 Pixelmatix. All Rights Reserved.</p>
+                </div>
+                
+            </div>
+            
+        </footer>
+
+ 
+     </div>
+     
+    
+    <script src="/js/jquery.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
+

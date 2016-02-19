@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://connected-displays.com/</loc>
+    <lastmod>2016-01-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://connected-displays.com/post/esp8266-weather-display/</loc>
+    <lastmod>2016-01-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://connected-displays.com/post/smart-stickers-product-preview/</loc>
+    <lastmod>2015-12-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://connected-displays.com/post/moodlight-product-preview/</loc>
+    <lastmod>2015-12-04T12:22:39-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://connected-displays.com/about/</loc>
+    <lastmod>2015-12-04T12:13:14-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://connected-displays.com/post/lametric-time-initial-review/</loc>
+    <lastmod>2015-11-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://connected-displays.com/post/raincheck-product-preview/</loc>
+    <lastmod>2015-11-01T00:00:00+00:00</lastmod>
+  </url>
+  
+</urlset>
