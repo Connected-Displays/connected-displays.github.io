@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Abouts on Connected Displays</title>
+    <link>http://www.connected-displays.com/about/</link>
+    <description>Recent content in Abouts on Connected Displays</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Nov 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://www.connected-displays.com/about/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>About</title>
+      <link>http://www.connected-displays.com/about/</link>
+      <pubDate>Sun, 01 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.connected-displays.com/about/</guid>
+      <description>
+
+&lt;p&gt;This is a blog for people interested in custom Internet Connected Displays, whether they want to build their own, see what other people are building, or just customize an off-the-shelf display.  You&amp;rsquo;ll find write-ups of interesting projects and products, information on display and connectivity technologies, and tutorials on how to easily make your own displays.&lt;/p&gt;
+
+&lt;p&gt;The Internet of Things (IoT) promises to add internet connectivity to everyday objects at a low cost, and over the last few years, has brought many options for easily adding internet connectivity to electronic projects.  Most IoT uses seem to be in collecting information or controlling devices, but there&amp;rsquo;s a growing number of products and projects focused on displaying information at a glance.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;lbavatar2.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;louis-beaudoin:d680e8a854a7cbad6d490c445cba2eba&#34;&gt;Louis Beaudoin&lt;/h3&gt;
+
+&lt;p&gt;Louis is an electrical engineer with specialization in embedded programming and hardware design.  Before starting Pixelmatix, Louis co-founded and lead hardware product design for a   startup with a cloud-connected product that has grown into a sustainable business. Louis is a long-time contributor to open source, and created the first USB bootloader for the ATtiny series of microcontrollers, which made products like the Arduino Gemma and Adafruit Trinket possible.&lt;/p&gt;
+
+&lt;h3 id=&#34;pixelmatix:d680e8a854a7cbad6d490c445cba2eba&#34;&gt;Pixelmatix&lt;/h3&gt;
+
+&lt;p&gt;Pixelmatix makes products and tools to make beautiful custom displays.  Find out more at &lt;a href=&#34;http://pixelmatix.com&#34;&gt;Pixelmatix.com&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

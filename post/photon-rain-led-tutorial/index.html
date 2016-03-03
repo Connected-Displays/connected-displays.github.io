@@ -9,7 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Connected Displays</title>
+
+    <title>New Tutorial: Umbrella Reminder with Particle Photon Webhooks | Connected Displays</title>
 
     
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -50,6 +51,32 @@
                 
                     <li>
 
+                        <a href="/tutorial"
+                        >
+
+                        
+                            <i class="fa fa-graduation-cap"></i>
+                        
+                        
+                        Tutorials
+                        </a>
+                    </li>
+                
+                    <li>
+
+                        <a href="/about"
+                        >
+
+                        
+                            <i class="fa fa-info-circle"></i>
+                        
+                        
+                        About
+                        </a>
+                    </li>
+                
+                    <li>
+
                         <a href="mailto:hello@connected-displays.com"
                          title="Send an email">
 
@@ -87,562 +114,22 @@
             
             <div class="col-lg-8">
 
-                <h1>Tutorial - Umbrella Reminder with Particle Photon and Forecast.io</h1>
-                <hr>
+                <h1>New Tutorial: Umbrella Reminder with Particle Photon Webhooks</h1>
                 <p><span class="glyphicon glyphicon-time"></span> 
-                Posted on Thu, Feb 4, 2016</p>
+                Posted on February 4, 2016 by Louis Beaudoin</p>
+                <hr>
+                
+                    
+                    <img class="img-responsive" src="http://www.connected-displays.com//post/photon-rain-led-tutorial/banner.jpg" class="article-banner">
+                    
                 <hr>
                 
                 <div class="post">
-                    
-
-<p><img src="banner.jpg" alt="" /></p>
-
-<p>I live in NYC and the weather can change suddenly.  It may look nice outside my window when I&rsquo;m getting ready to leave, but a storm could be inbound.  I&rsquo;d like to have something that tells me to &ldquo;bring your umbrella&rdquo; right next to the door.</p>
+                    <p>I live in NYC and the weather can change suddenly.  It may look nice outside my window when I&rsquo;m getting ready to leave, but a storm could be inbound.  I&rsquo;d like to have something that tells me to &ldquo;bring your umbrella&rdquo; right next to the door.</p>
 
 <p>This is my first project done with the <a href="https://www.particle.io/prototype">Particle Photon</a>, and because I couldn&rsquo;t find a comprehensive tutorial on this type of project, I wrote it up in tutorial form. The tutorial demonstrates polling for data from a third-party API using Webhooks, and requires no extra parts or assembly to get going.</p>
 
-<p>I backed the initial <a href="https://www.kickstarter.com/projects/sparkdevices/spark-core-wi-fi-for-everything-arduino-compatible">Kickstarter campaign</a> for the Spark Core back in 2013 but never made use of the Core as it didn&rsquo;t have enough memory for the projects I was working on at the time.  I kept watching for an announcement of a V2 Spark Core, and when the Photon was announced I preordered a few immediately.  While it&rsquo;s not needed for this project, the Photon has plenty of memory and a better WiFi chipset than the Core, and at $20 is a great value.</p>
-
-<p>If you&rsquo;re replicating this project, all you need to buy is a Photon.  Hopefully you already have a computer, USB micro-B cable, and smartphone capable of running the Particle app to initially configure the Photon.</p>
-
-<h2 id="getting-started-blink-an-led:d680e8a854a7cbad6d490c445cba2eba">Getting Started - Blink an LED</h2>
-
-<p>Follow the <a href="https://docs.particle.io/guide/getting-started/start/photon/">Getting Started</a> section of the Photon Guide to create a Particle.io account, connect the Photon to your WiFi network using the smartphone app, and give it a name (&ldquo;Umbrella_Light&rdquo;).  I didn’t have any trouble setting up WiFi using the app, but some friends have had trouble using the app.  There is a way to add the Photon to your account and connect it to your WiFi network using USB after <a href="https://docs.particle.io/guide/tools-and-features/cli/photon/#installing">installing the Particle CLI tool.</a> CLI is needed later in this tutorial, so it you want to skip the Particle app and setup everything with CLI, you&rsquo;re not wasting any time.</p>
-
-<p><img src="DraggedImage.png" alt="" /></p>
-
-<p>Next let&rsquo;s go to <a href="https://build.particle.io/build">Particle Build</a>, the web IDE for Particle products that will let you write code, compile, and update your Photon all from a browser.  If you&rsquo;ve used the Arduino IDE before, Build is a similar concept, only everything is done in a browser and programming is done over WiFi not USB.</p>
-
-<p>Start by opening the Devices tab, find &ldquo;Umbrella_Light&rdquo;, and make sure it&rsquo;s online (circle <a href="https://docs.particle.io/guide/getting-started/modes/photon/#connected">breathing cyan</a> next to the name.  If you’re already a Particle user and there are multiple devices in your list, hover to the left of the name and click to show a yellow star.  The device with a star will get flashed with new firmware when you use the Flash function.</p>
-
-<p><img src="DraggedImage-1.png" alt="" /></p>
-
-<p>Now go to the Code tab.  Click on the Example app called &ldquo;BLINK AN LED&rdquo;, then the button at the top “USE THIS EXAMPLE&rdquo;.  Rename the app from &ldquo;BLINK AN LED&rdquo; to &ldquo;UMBRELLA-LIGHT&rdquo; by clicking on the name.  Now click on each of the icons in the upper left from bottom to top: Save, Verify, Flash, looking at the status that shows up below the code before continuing to the next one.</p>
-
-<p><img src="DraggedImage-2.png" alt="" /></p>
-
-<p>Your Photon&rsquo;s RGB LED should go through <a href="https://docs.particle.io/guide/getting-started/modes/photon/">several changes</a> as firmware is loading and it starts up.  If this is your first time using the Photon, the base firmware may need to be updated which can take a minute or more.  You might see blinking magenta, then blinking of other colors, but in the end the LED should show Breathing Cyan (connected).  The Blue LED next to pin D7 should now be blinking on and off.  Your first program is loaded and running!</p>
-
-<h2 id="customizing-the-firmware:d680e8a854a7cbad6d490c445cba2eba">Customizing the Firmware</h2>
-
-<h3 id="leds:d680e8a854a7cbad6d490c445cba2eba">LEDs</h3>
-
-<p>As I’m walking out my door, I want to know at a glance if there’s a chance of rain in the next four hours, so I can make a decision on if I should bring an umbrella.  I figure there are four states that can easily be displayed on the Blue LED, and recognizable at a glance:</p>
-
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center"></th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td align="center"><strong>State</strong></td>
-<td align="center"><strong>Blue LED</strong></td>
-</tr>
-
-<tr>
-<td align="center">Bring an umbrella</td>
-<td align="center">ON</td>
-</tr>
-
-<tr>
-<td align="center">Chance of rain</td>
-<td align="center">Short Pulse</td>
-</tr>
-
-<tr>
-<td align="center">No Rain</td>
-<td align="center">OFF</td>
-</tr>
-
-<tr>
-<td align="center">Can&rsquo;t Connect</td>
-<td align="center">Flashing Fast</td>
-</tr>
-</tbody>
-</table>
-
-<p>This code added before <code>setup()</code> lets us try out the new LED states.</p>
-
-<pre><code>enum weatherState {
-    WEATHER_STATE_BRING_UMBRELLA,
-    WEATHER_STATE_CHANCE_OF_RAIN,
-    WEATHER_STATE_NO_RAIN,
-    WEATHER_STATE_CANT_CONNECT
-};
-
-// returns after 1 second
-void controlWeatherLed(int state) {
-    switch (state) {
-        case WEATHER_STATE_BRING_UMBRELLA:
-        digitalWrite(led1, HIGH);
-        digitalWrite(led2, HIGH);
-        delay(1000);
-        break;
-
-        case WEATHER_STATE_CHANCE_OF_RAIN:
-        digitalWrite(led1, HIGH);
-        digitalWrite(led2, HIGH);
-        delay(200);
-
-        digitalWrite(led1, LOW);
-        digitalWrite(led2, LOW);
-        delay(800);
-        break;
-
-        case WEATHER_STATE_NO_RAIN:
-        digitalWrite(led1, LOW);
-        digitalWrite(led2, LOW);
-        delay(1000);
-        break;
-
-        case WEATHER_STATE_CANT_CONNECT:
-        default:
-        int i;
-        for(i=0; i&lt;5; i++) {
-            digitalWrite(led1, HIGH);
-            digitalWrite(led2, HIGH);
-            delay(100);
-            digitalWrite(led1, LOW);
-            digitalWrite(led2, LOW);
-            delay(100);
-        }
-
-        break;
-    }
-}
-</code></pre>
-
-<p>Replace the code in <code>loop()</code> with this snippet and loop will now cycle through the states, staying on each one for 5 seconds.</p>
-
-<pre><code>void loop() {
-    controlWeatherLed(WEATHER_STATE_BRING_UMBRELLA);
-    controlWeatherLed(WEATHER_STATE_BRING_UMBRELLA);
-    controlWeatherLed(WEATHER_STATE_BRING_UMBRELLA);
-    controlWeatherLed(WEATHER_STATE_BRING_UMBRELLA);
-    controlWeatherLed(WEATHER_STATE_BRING_UMBRELLA);
-
-    controlWeatherLed(WEATHER_STATE_CHANCE_OF_RAIN);
-    controlWeatherLed(WEATHER_STATE_CHANCE_OF_RAIN);
-    controlWeatherLed(WEATHER_STATE_CHANCE_OF_RAIN);
-    controlWeatherLed(WEATHER_STATE_CHANCE_OF_RAIN);
-    controlWeatherLed(WEATHER_STATE_CHANCE_OF_RAIN);
-
-    controlWeatherLed(WEATHER_STATE_CANT_CONNECT);
-    controlWeatherLed(WEATHER_STATE_CANT_CONNECT);
-    controlWeatherLed(WEATHER_STATE_CANT_CONNECT);
-    controlWeatherLed(WEATHER_STATE_CANT_CONNECT);
-    controlWeatherLed(WEATHER_STATE_CANT_CONNECT);
-
-    controlWeatherLed(WEATHER_STATE_NO_RAIN);
-    controlWeatherLed(WEATHER_STATE_NO_RAIN);
-    controlWeatherLed(WEATHER_STATE_NO_RAIN);
-    controlWeatherLed(WEATHER_STATE_NO_RAIN);
-    controlWeatherLed(WEATHER_STATE_NO_RAIN);
-}
-</code></pre>
-
-<p>You can get the full file here:</p>
-
-<div id="gist300">
-<style type="text/css"> 
-#gist300 .gist .blob-wrapper.data {
-   max-height:300px;
-   overflow:auto;
-}
-</style>
-<script src="https://gist.github.com/embedded-creations/4a2f94d155ecbfaf9586.js"> </script>
-</div>
-
-<p>Flash your Photon with the new program, and you&rsquo;ll be able to see what the different states look like on the blue LED.</p>
-
-<h3 id="webhooks-overview:d680e8a854a7cbad6d490c445cba2eba">Webhooks Overview</h3>
-
-<p>Now we need to get data from a weather service.  Particle has an integration with IFTTT that looks really easy to set up, but I know from previous experience that IFTTT isn&rsquo;t well suited to deliver this information.  You can set up a trigger on IFTTT to send the forecast at a specific time of day, but I want to see the latest forecast no matter when I look at the display, not just at one time during the day.  We&rsquo;ll need to connect to a weather API and poll it periodically to keep the Photon updated with the latest forecast.</p>
-
-<p><a href="http://forecast.io">Forecast.io</a> is my favorite website to check the weather, and I use their Dark Sky iOS app.  They have <a href="https://developer.forecast.io">an open API</a>, and a Google search turned up a <a href="https://medium.com/@dgmltn/particle-weather-widget-6f01eac5ec6c">Photon project</a> that gets data from the Forecast.io API using Webhooks.</p>
-
-<p><a href="https://docs.particle.io/guide/tools-and-features/Webhooks/">Webhooks</a> are an important feature of the Particle Cloud that allow a simple embedded device to get data from or send data to a web API that may be too complex to interact with directly.  Most microcontrollers aren&rsquo;t powerful enough to connect directly over HTTPS, and the responses sent by most APIs are large and not easy to parse on a microcontroller.  Webhooks take care of those issues by querying the server from the cloud, and relaying the response back in a simple format.</p>
-
-<p>For example, a sample Forecast.io query I tried had over 23kB of data in the response that the Photon would have to store and parse through using complex code.  All I really want is a few values from that data with the chance of precipitation, and a Webhook can filter the rest out.</p>
-
-<p>Webhooks have been out of beta since March 2015, but unfortunately as of publishing this tutorial in February 2016, they have to be setup using the Particle CLI (command line interface), as there is not yet a web interface for creating and managing Webhooks.  You&rsquo;ll need to <a href="https://docs.particle.io/guide/tools-and-features/cli/photon/#installing">follow the instructions</a> in Particle Docs to install the CLI, which requires installing <a href="https://nodejs.org/en/">Node.js</a> (I used v5.7.0 Stable).</p>
-
-<p>An important feature of Webhooks is responseTemplates, which give the option for the server to format the response so it contains just the data we are interested in, and to make the data easier to parse.  There&rsquo;s only <a href="https://docs.particle.io/guide/tools-and-features/webhooks/#responsetemplate">minimal documentation</a> on this feature, but I found helpful users on the forums posting what has worked for them, and <a href="https://community.particle.io/t/tutorial-webhooks-and-responses-with-parsing-json-mustache-tokens/14612">one user-submitted tutorial</a>.  I&rsquo;ll explain how to use responseTemplates later in this tutorial.</p>
-
-<h3 id="getting-data-from-forecast-io:d680e8a854a7cbad6d490c445cba2eba">Getting Data from Forecast.io</h3>
-
-<p>Let&rsquo;s get started by signing up for a free <a href="https://developer.forecast.io">Forecast.io API account</a>.   Once you&rsquo;re in, copy your <code>APIKEY</code> as you&rsquo;ll need it later, and note that you shouldn&rsquo;t share this with anyone, so don&rsquo;t post it as part of a URL on a forum for example.  Next, go to the <a href="https://developer.forecast.io/docs/v2">API Docs</a>, and scroll down to the first API call, &ldquo;The Forecast Call&rdquo;.  From the URL on the first line of this section, you can build up a call that returns the forecast.  First, substitute your APIKEY for the text <code>APIKEY</code> in the URL.  Next, get your latitude and longitude.  An easy way to do this is by putting your address into the location box on the main <a href="http://forecast.io">Forecast.io homepage</a> or by using the &ldquo;Current Location&rdquo; button on that page.  Your latitude and longitude are updated in your browsers URL, so copy those, and paste them into your API URL.</p>
-
-<pre><code>https://api.forecast.io/forecast/APIKEY/LATITUDE,LONGITUDE
-</code></pre>
-
-<p>Now you can paste your custom URL into a browser window and see what your Photon would receive using the simplest Webhook.  That&rsquo;s a lot of data!  This data would come in 512 byte chunks, and it would be difficult to write code that is able to look for just the data we want across all those chunks.  That&rsquo;s where responseTemplates come in.</p>
-
-<p>We need to tell the Webhook where to find the information we want, so lets figure that out ourselves.  First let&rsquo;s make the JSON response easier to read.  Copy the whole response from your browser window, and paste it into the &ldquo;text&rdquo; window at <a href="http://jsonviewer.stack.hu">this online JSON viewer</a>.  Press the &ldquo;Format&rdquo; button and it will add whitespace so you can see the structure easier.  Go to the &ldquo;viewer&rdquo; tab and you can see the data organized nicely.  You could go back to the API Docs and read up on what all these properties mean, but I found the names to be quite descriptive.</p>
-
-<p><img src="DraggedImage-3.png" alt="" /></p>
-
-<p>I&rsquo;m interested in if it might rain from the time I leave home, to when I might return.  I want this information at a glance, and we only have one LED, so I have to pick a single time range where I might be out.  I&rsquo;m going to choose four hours as I work from home and would usually be going out for an errand or quick meetup.  With more LEDs, we could display several time ranges; that would be a good improvement for a future project.</p>
-
-<p>The &ldquo;hourly&rdquo; data block seems like the best choice for finding info on chance of rain in the next four hours.  We can look at <code>precipProbability</code> in hourly data blocks 0-3.  Now to tell the Webhook to give us just this information.</p>
-
-<p><img src="DraggedImage-4.png" alt="" /></p>
-
-<h3 id="responsehooks-and-mustache-templates:d680e8a854a7cbad6d490c445cba2eba">ResponseHooks and Mustache Templates</h3>
-
-<p>The responseTemplate tells the Particle Cloud what data we want to receive, and the order and format we want to receive it in.  It only works with JSON formatted responses, not XML like many APIs still use.  It uses <a href="http://mustache.github.io">Mustache Templates</a>, named for the curly braces that look like a bit like mustaches.  Let&rsquo;s use the <a href="http://mustache.github.io/#demo">demo on the Mustache site</a> to first explain how they work, then make a template for our data.</p>
-
-<p>The demo has three sections: Mustache (the template), JSON (the data to apply to the template), and HTML (the result of applying the JSON to the template).  In the demo, the Mustache template is a mix of HTML tags (in angle brackets <code>&lt;&gt;</code>) and Mustache tags (in double curly braces <code>{{}}</code>).</p>
-
-<p>The demo uses several features of Mustache templates, but the first line of the template is enough to demonstrate what we need for this project.  Press the &ldquo;Render HTML&rdquo; button, and you can see that <code>&lt;h1&gt;{{header}}&lt;/h1&gt;</code> causes the value of &ldquo;header&rdquo; in the JSON object to show up in the HTML result between the <code>&lt;h1&gt;&lt;/h1&gt;</code> tags.</p>
-
-<p><img src="DraggedImage-5.png" alt="" /></p>
-
-<p>When we&rsquo;re done putting our data in the demo boxes, &ldquo;Mustache&rdquo; is what we will use for the responseTemplate, &ldquo;JSON&rdquo; will be coming from Forecast.io, and the &ldquo;HTML&rdquo; section (which in our case doesn&rsquo;t use HTML at all) is what we will send to the Photon.  Let&rsquo;s come up with a template first.</p>
-
-<p>Going back to the JSON viewer, the data we want is the value of <code>precipProbability</code> nested under &ldquo;hourly&rdquo;, &ldquo;data&rdquo;, and number 0-3.  We need four Mustarche tags in our template to render that data in the result.  Paste this into the &ldquo;Mustache&rdquo; section of the demo:</p>
-
-<pre><code>{{hourly.data.0.precipProbability}}
-{{hourly.data.1.precipProbability}}
-{{hourly.data.2.precipProbability}}
-{{hourly.data.3.precipProbability}}
-</code></pre>
-
-<p>Now you can paste the Forecast.io JSON response for your custom API call into the demo&rsquo;s JSON box.  Press the &ldquo;Render Template&rdquo; button and you should see four probability values show up in the HTML box.</p>
-
-<p><img src="DraggedImage-6.png" alt="" /></p>
-
-<p>In case there&rsquo;s no rain in your forecast, try getting the forecast for somewhere that&rsquo;s currently seeing some rain.  Drag the location pin on the <a href="http://forecast.io">Forecast.io</a> weather globe to somewhere with some precipitation on the radar, make sure there&rsquo;s rain in the forecast, then use the latitude/longitude from the browser URL to update your API URL.  Here&rsquo;s a sample you can use:</p>
-
-<div id="gist300">
-<style type="text/css"> 
-#gist300 .gist .blob-wrapper.data {
-   max-height:300px;
-   overflow:auto;
-}
-</style>
-<script src="https://gist.github.com/embedded-creations/b3625d3a8eaa36b729ad.js"> </script>
-</div>
-
-<p>Now we need to make the response easy to parse.  The line breaks between values make it easy for us to read, but we could replace those with a token character to makes the response both readable and easily parseable by code.  Edit the template, deleting the line breaks and adding tilde <code>~</code> characters between each Mustache tag:</p>
-
-<pre><code>{{hourly.data.0.precipProbability}}~{{hourly.data.1.precipProbability}}~{{hourly.data.2.precipProbability}}~{{hourly.data.3.precipProbability}}
-</code></pre>
-
-<p>Now when you render, the result looks like:</p>
-
-<pre><code>0.64~0.67~0.63~0.59
-</code></pre>
-
-<h3 id="create-webhook:d680e8a854a7cbad6d490c445cba2eba">Create Webhook</h3>
-
-<p>We&rsquo;re now ready to build the Webhook.  Open a command prompt, and make sure Particle CLI is working by typing <code>particle</code>.  You need to login to your Particle account the first time using the CLI, <code>particle login</code>.  Run the <code>particle webhook create</code> command without any more parameters in your terminal window, and it will return usage details including a JSON Template.  Copy the template and paste into a text editor, then save as <code>forecast_4hourrain.json</code>.</p>
-
-<p>Edit the template line by line:</p>
-
-<ul>
-<li><code>event</code>- give it a good name, like <code>forecast_4hourrain</code></li>
-<li><code>url</code> - this is the API url with your APIKEY and location</li>
-<li><code>deviceid</code> - delete this line, we can use this Webhook with any of our devices</li>
-<li>You can delete the &ldquo;following parameters are optional line&rdquo;, it&rsquo;s just a comment</li>
-<li><code>mydevices</code> - set to <code>true</code>, we don&rsquo;t want someone else&rsquo;s device accidentally using this Webhook and using up our limited API queries</li>
-<li><code>requestType</code> - set to &ldquo;GET&rdquo;, we are using an HTML GET for the query</li>
-<li><code>form</code> - delete, we&rsquo;re not submitting a form</li>
-<li><code>headers</code> - delete, we don&rsquo;t have custom headers</li>
-<li><code>query</code> - delete, we aren&rsquo;t including extra parameters in the URL</li>
-<li><code>json</code> - delete, we&rsquo;re not including JSON with the request</li>
-<li><code>auth</code> - delete, the API doesn&rsquo;t use authentication</li>
-<li><code>responseTemplate</code> - paste the Mustache template in quotes replacing <code>null</code>: <code>&quot;{{hourly.data.0.precipProbability}}~{{hourly.data.1.precipProbability}}~{{hourly.data.2.precipProbability}}~{{hourly.data.3.precipProbability}}&quot;</code></li>
-<li><code>rejectUnauthorized</code> - delete, only needed to ignore a bad SSL certification</li>
-<li>Make sure the last line (responseTemplate), doesn&rsquo;t end with a comma, or the file won&rsquo;t parse</li>
-</ul>
-
-<p>Your template should look like this, but containing your unique URL:</p>
-
-<pre><code>{
-  &quot;event&quot;: &quot;forecast_4hourrain&quot;,
-  &quot;url&quot;: &quot;https://api.forecast.io/forecast/APIKEY/40.7608,-73.9580&quot;,
-  &quot;_&quot;: &quot;The following parameters are optional&quot;,
-  &quot;mydevices&quot;: &quot;true&quot;,
-  &quot;requestType&quot;: &quot;GET&quot;,
-  &quot;responseTemplate&quot;: &quot;{{hourly.data.0.precipProbability}}~{{hourly.data.1.precipProbability}}~{{hourly.data.2.precipProbability}}~{{hourly.data.3.precipProbability}}&quot;
-}
-</code></pre>
-
-<p>You can validate your JSON by pasting into <a href="http://jsonlint.com/">JSONLint</a>; I initially had an extra comma after the &ldquo;responseTemplate&rdquo; line, and JSONLint caught it.  When you&rsquo;re done, save, then use this command in a terminal window to create the Webhook on the Particle Cloud.</p>
-
-<p><code>particle webhook create forecast_4hourrain.json</code></p>
-
-<p>You should see something like &ldquo;<code>Successfully created webhook with ID ...</code>&rdquo;, and now we&rsquo;re ready to update the firmware to read the Webhook.</p>
-
-<h3 id="update-firmware-to-handle-webhook:d680e8a854a7cbad6d490c445cba2eba">Update Firmware to Handle Webhook</h3>
-
-<p>It&rsquo;s easy to trigger the Webhook and have the Photon listen for a response.  Add this code in <code>setup()</code>:</p>
-
-<pre><code>    if (Particle.subscribe(&quot;hook-response/forecast_4hourrain&quot;, gotForecast, MY_DEVICES)) {
-        Serial.println(&quot;subscribed!&quot;);
-    } else {
-        Serial.println(&quot;error: subscription failed&quot;);
-    }
-</code></pre>
-
-<p>Add this function, which will be called when the Webhook response is received, and for right now, will print what it receives to a terminal over USB:</p>
-
-<pre><code>void gotForecast(const char *event, const char *data) {
-    static int i = 0;
-    i++;
-    Serial.print(i);
-    Serial.print(event);
-    Serial.print(&quot;, data: &quot;);
-    if (data)
-        Serial.println(data);
-    else
-        Serial.println(&quot;NULL&quot;);
-}
-</code></pre>
-
-<p>Finally, add this code to <code>loop()</code> to trigger the Webhook:</p>
-
-<pre><code>    // wait 10 seconds after reset before sending the first trigger
-    static unsigned long nextTrigger = 10 * 1000;
-
-    if (nextTrigger &lt; millis()) {
-        // polling Webhook every 2 minutes is 720 API calls/day
-        nextTrigger = millis() + 2*60*1000;
-
-        Serial.println(&quot;Requesting Forecast&quot;);
-        Particle.publish(&quot;forecast_4hourrain&quot;);
-    }
-</code></pre>
-
-<p>Here&rsquo;s the full file with all the above changes:</p>
-
-<div id="gist300">
-<style type="text/css"> 
-#gist300 .gist .blob-wrapper.data {
-   max-height:300px;
-   overflow:auto;
-}
-</style>
-<script src="https://gist.github.com/embedded-creations/013642d5b7ff13ff2535.js"> </script>
-</div>
-
-<p>Before you flash your Photon with the new code, we need to get some debugging tools ready.  First, we need a tool for seeing USB Serial traffic from the Photon.  There are a lot of options, and you may already have a preferred serial terminal program.  If you don&rsquo;t, Particle CLI - which we already installed - <a href="https://github.com/spark/particle-cli#particle-serial-monitor">includes a basic one</a>.  Type this into your terminal window:<br />
-<code>particle serial monitor</code></p>
-
-<p>You should see a response like <code>Opening serial monitor for com port: &quot;/dev/cu.usbmodem1413521&quot;</code>, though it won&rsquo;t actually open unless the Photon is running firmware that opens the Serial device.  You&rsquo;ll need to run that command again each time the Photon resets, and the Photon will reset each time you flash it with new firmware.  This can get tiring if you are doing a lot of flashing, and there are programs out there that automatically reconnect after a disconnect (I personally use <a href="https://www.decisivetactics.com/products/serial/">Serial for the Mac</a>), but the CLI serial monitor is good enough for this project.</p>
-
-<p>Next, it would be nice to have a way to see what&rsquo;s going on in the Particle Cloud.  The <a href="https://dashboard.particle.io/user/logs">Particle Dashboard</a> can show when the Cloud receives the publish event to start the Webhook, and Webhook request and response.</p>
-
-<p>OK, with all our dev tools ready, let&rsquo;s flash the firmware.  Press the &ldquo;flash&rdquo; button in Particle Build, and watch your terminal window for the Photon to disconnect as it receives new firmware.  You can use the <code>particle serial monitor</code> command immediately after it disconnects so the serial monitor is ready for the firmware to start.  Switch over to Particle Dashboard in your browser.</p>
-
-<p>If everything is working, you should see this in your serial monitor window:</p>
-
-<pre><code>Opening serial monitor for com port: &quot;/dev/cu.usbmodem141331&quot;
-subscribed!
-Requesting Forecast
-1hook-response/forecast_4hourrain/0, data: 0~0~0~0
-</code></pre>
-
-<p>And you should see this in the Particle Dashboard:</p>
-
-<p><img src="DraggedImage-7.png" alt="" /></p>
-
-<p>Starting from the oldest message at the bottom, the first few messages are self explanatory, though you can ignore the <code>/spark/flash/status - failed</code> event as I&rsquo;ve never seen a <code>success</code> event since starting with the Photon.   Next, the Photon published an event named <code>forecast_4hourrain</code>, which triggers the Webhook request.  The next event, <code>hook-sent/forecast_4hourrain</code> tells us that the Webhook was triggered and the Forecast.io Webhook was started.  We don&rsquo;t subscribe to this event on the Photon, so nothing happens there, but if we did, we could print out a message for debugging.  The last event is <code>hook-response/forecast_4hourrain</code>, which contains the data coming from Forecast.io after applying the responseTemplate.  We do subscribe to this event on the Photon, so it prints out <code>1hook-response/forecast_4hourrain/0, data: 0~0~0~0</code>.</p>
-
-<p>If you don&rsquo;t see something similar, scroll down to the troubleshooting section at the end of the article, and make sure the Webhook is working properly before continuing on.</p>
-
-<h3 id="control-led:d680e8a854a7cbad6d490c445cba2eba">Control LED</h3>
-
-<p>OK, we have forecast data coming into the Photon, and a status LED, let&rsquo;s get them working together.  We want <code>loop()</code> to update the state of the display with the data from the forecast, then to call <code>controlWeatherLed()</code> with the latest state.  Let&rsquo;s start with the easy part, setting the state to     <code>WEATHER_STATE_BRING_UMBRELLA</code> or <code>WEATHER_STATE_CHANCE_OF_RAIN</code> based on the Webhook response.</p>
-
-<p>We&rsquo;ll create a new variable called <code>state</code>.  It needs to be declared outside of any function as it will be set by <code>gotForecast()</code>, and used inside <code>loop()</code>.</p>
-
-<pre><code>// start off in WEATHER_STATE_CANT_CONNECT, this should update after the first Webhook response is received
-int state = WEATHER_STATE_CANT_CONNECT;
-</code></pre>
-
-<p>In <code>gotForecast()</code>, we should parse the Webhook response instead of just printing it.  The token characters we added between values in the response template are there so we can use the <a href="http://www.cplusplus.com/reference/cstring/strtok/"><code>strtok()</code> (Split string into tokens) function</a> to parse the response.  We want to know if there is a valid response from the API (are there any values?), if it&rsquo;s going to rain (is probability is above the rain threshold?), or if there&rsquo;s a chance it&rsquo;s going to rain (is probability is below the rain threshold but above the chance threshold?).  Add this to the end of <code>gotForecast()</code> to parse the response, looking for the largest probability value:</p>
-
-<pre><code>    // strtok can't work with const data array, copy to editable array - length is 4x prob values (4*4 chars), three tokens + null
-    char dataString[4 * 4 + 3 + 1];
-    strncpy(dataString, data, sizeof(dataString));
-
-    // go through array, parse each probability value and find the largest
-    i = 0;
-    float largestProbability = -1.0;
-    char * pch = strtok(dataString, &quot;~&quot;);
-    while (pch != NULL) {
-        float probability = atof(pch);
-
-        Serial.print(&quot;Chance of rain in hour &quot;);
-        Serial.print(i);
-        Serial.print(&quot;: &quot;);
-        Serial.println(probability);
-
-        if (probability &gt; largestProbability)
-            largestProbability = probability;
-
-        pch = strtok(NULL, &quot;~&quot;);
-        i++;
-    }
-</code></pre>
-
-<p>Now that we have the largest probability value from the response, it&rsquo;s easy to set the state.  First we need to define the thresholds (you can easily change these to your liking):</p>
-
-<pre><code>const float umbrellaThreshold = 0.50;
-const float chanceofrainThreshold = 0.25;
-</code></pre>
-
-<p>Finally, at the end of <code>gotForecast()</code> we compare the thresholds to the largest probability:</p>
-
-<pre><code>    if (largestProbability &lt; 0) {
-        state = WEATHER_STATE_CANT_CONNECT;
-        Serial.println(&quot;Response didn't contain valid data - WEATHER_STATE_CANT_CONNECT&quot;);
-    } else if (largestProbability &gt;= umbrellaThreshold) {
-        state = WEATHER_STATE_BRING_UMBRELLA;
-        Serial.println(&quot;Bring an umbrella! - WEATHER_STATE_BRING_UMBRELLA&quot;);
-    } else if (largestProbability &gt;= chanceofrainThreshold) {
-        state = WEATHER_STATE_CHANCE_OF_RAIN;
-        Serial.println(&quot;It might rain! - WEATHER_STATE_CHANCE_OF_RAIN&quot;);
-    } else {
-        state = WEATHER_STATE_NO_RAIN;
-        Serial.println(&quot;Doesn't look like rain - WEATHER_STATE_NO_RAIN&quot;);
-    }
-</code></pre>
-
-<p>Going back to <code>loop()</code>, we can replace our demo calls to <code>controlWeatherLed()</code> with one real call using the state variable:</p>
-
-<pre><code>    controlWeatherLed(state);
-</code></pre>
-
-<p>Here&rsquo;s the full file with all the above changes:</p>
-
-<div id="gist300">
-<style type="text/css"> 
-#gist300 .gist .blob-wrapper.data {
-   max-height:300px;
-   overflow:auto;
-}
-</style>
-<script src="https://gist.github.com/embedded-creations/64d9e663bc9bfaba480f.js"> </script>
-</div>
-
-<p>Flash your Photon, and after receiving the response, it should print out the chance of rain for the next four hours and the state over Serial, and drive the blue LED accordingly.</p>
-
-<pre><code>subscribed!
-Requesting Forecast
-1hook-response/forecast_4hourrain/0, data: 0~0~0~0
-Chance of rain in hour 0: 0.00
-Chance of rain in hour 1: 0.00
-Chance of rain in hour 2: 0.00
-Chance of rain in hour 3: 0.00
-Doesn't look like rain - WEATHER_STATE_NO_RAIN
-</code></pre>
-
-<h3 id="robustness:d680e8a854a7cbad6d490c445cba2eba">Robustness</h3>
-
-<p>So, we have a LED that tells us the chance of rain, updating every two minutes, and will tell us if there&rsquo;s a problem, right?  Not quite.  The state only updates if we get a response from the Webhook, and with a connectivity problem or Webhook problem, we may never get a response.  Let&rsquo;s set a timeout after making the Webhook request, and make sure there&rsquo;s a response received before the timeout.</p>
-
-<p>We create a new global timeout variable, as it needs to be accessed by both <code>loop()</code> and <code>gotForecast()</code>.</p>
-
-<pre><code>// keep track of when we expect a response from the Webhook
-unsigned long nextTimeout;
-</code></pre>
-
-<p>Set the timeout in <code>loop()</code> right after publishing the Webhook request:</p>
-
-<pre><code>        // We expect a response within 30 seconds
-        nextTimeout = millis() + 30 * 1000;
-</code></pre>
-
-<p>Look for an expired timeout in <code>loop()</code>, right before calling <code>controlWeatherLed()</code>:</p>
-
-<pre><code>    if (nextTimeout &lt; millis()) {
-        // we waited too long for a response, set to error state and set timeout to far off future
-        state = WEATHER_STATE_CANT_CONNECT;
-        nextTimeout = ULONG_MAX;
-        Serial.println(&quot;Response timeout - WEATHER_STATE_CANT_CONNECT&quot;);
-    }
-</code></pre>
-
-<p>And finally, disable the timeout when we get a Webhook response in <code>gotForecast()</code>:</p>
-
-<pre><code>    // we got our response, set timeout to the far off future
-    nextTimeout = ULONG_MAX;
-</code></pre>
-
-<p>Now our program is complete.  Flash your Photon with the final code:</p>
-
-<div id="gist300">
-<style type="text/css"> 
-#gist300 .gist .blob-wrapper.data {
-   max-height:300px;
-   overflow:auto;
-}
-</style>
-<script src="https://gist.github.com/embedded-creations/d9618fe08c9000744f3f.js"> </script>
-</div>
-
-<h2 id="testing:d680e8a854a7cbad6d490c445cba2eba">Testing</h2>
-
-<p>We&rsquo;re done, right?  Let&rsquo;s find out by doing some quick tests.  It&rsquo;s not easy to test with realtime data for your location as the weather doesn&rsquo;t usually change that quickly and we&rsquo;re looking at a four-hour window. Instead, let&rsquo;s change the Webhook.</p>
-
-<p>An easy test is to see what happens when the Webhook call fails.  Delete the Webhook using these commands:</p>
-
-<ul>
-<li><code>particle webhook list</code> - use to get the Hook ID of <code>forecast_4hourrain</code></li>
-<li><code>particle webhook delete HOOKID</code> - replace <code>HOOKID</code> with your actual 24-digit ID</li>
-</ul>
-
-<p>Now, wait the two minutes for the next Webhook request plus 30 seconds for the timeout, and you should see the state change to <code>WEATHER_STATE_CANT_CONNECT</code>.</p>
-
-<p>While you&rsquo;re waiting, make three copies of your <code>forecast_4hourrain.json</code> file, call them <code>forecast_4hourrain_umbrella.json</code>, <code>forecast_4hourrain_chancerain.json</code>, <code>forecast_4hourrain_norain.json</code>.  Go to <a href="http://forecast.io">forecast.io</a> and move the pin around on the globe to find areas that are currently raining, have a chance of rain, and have no rain in the next four hours.  One of these is redundant as your home already falls into one of these categories.  For each that you still need to test, create an API URL for the location, verify the precipitationProbability for the next 4 hours using your browser to do the request and <a href="http://jsonviewer.stack.hu">jsonviewer</a> to view the data, and paste the API URL into your JSON file.  It can be difficult to find a location with just a chance of rain, it took me about ten tries looking at the API response for locations that looked promising on the map (zoomed in to the Regional level and on the edges of storms) before finding a location that had a chance of precipitation, but was &lt; 50%.</p>
-
-<p>Let&rsquo;s finish up the <code>WEATHER_STATE_CANT_CONNECT</code> test, did you see the state change in both the terminal and see a fast flashing LED?  Great!</p>
-
-<p>To test the other conditions, one by one, delete the previous Webhook (<code>particle webhook list</code> to get the <code>HOOK_ID</code>, then <code>particle webhook delete HOOK_ID</code>), create the new one using your modified JSON file (<code>particle webhook create FILENAME.json</code>), and wait to see the results on your Photon.  It&rsquo;s going to be faster to reset your Photon each time and wait ten seconds for the request than to wait up to two minutes for the firmware to request on its normal schedule.  Finally, delete the test Webhook and load the normal Webhook for your location.</p>
-
-<p>Did you see the LED turn on for the location with rain, LED showing a short pulse for the location with a chance of rain, and LED turn off for the location with no rain?  Great, now we&rsquo;re confident that everything is working properly, and you can start using your new umbrella reminder display!</p>
-
-<h2 id="next-steps:d680e8a854a7cbad6d490c445cba2eba">Next Steps</h2>
-
-<h3 id="customizing-the-data:d680e8a854a7cbad6d490c445cba2eba">Customizing the Data</h3>
-
-<p>Maybe you have different thresholds for when you want to see &ldquo;chance&rdquo; of rain, or you want to change the display to show the next eight hours.  You should be able to easily modify the code and Webhook to show you what you want to see.</p>
-
-<p>Maybe you&rsquo;re more interested in seeing the current or forecasted temperature?  There&rsquo;s a lot more data in the Forecast.io API response that could be used instead.</p>
-
-<h3 id="mounting-and-enclosures:d680e8a854a7cbad6d490c445cba2eba">Mounting and Enclosures</h3>
-
-<p>You can mount the Photon where you want to see the information, maybe near the front door, where you keep your umbrella, where you get dressed in the morning, or anywhere else you&rsquo;re likely to glance at when you&rsquo;re getting ready to go out.</p>
-
-<p>The little matchbox case the Photon comes in can be used for a makeshift enclosure as the LEDs shine through the translucent material.  It&rsquo;s flexible enough to allow the USB cable to remain attached for power.  With a little cutout in the cardboard made with a hobby knife, it fits even better.</p>
-
-<p><img src="DraggedImage-8.png" alt="" /></p>
-
-<p>Maybe the Photon enclosure is a little too rough, you could make your own.  A picture frame with thin white paper or a translucent material could be a good start.</p>
-
-<h3 id="customizing-the-electronics:d680e8a854a7cbad6d490c445cba2eba">Customizing the Electronics</h3>
-
-<p>Is the built-in LED not bright enough, or do you want to display more information?  It&rsquo;s easy to add a brighter external LED, the code already drives pin D0 like in the Photon <a href="https://docs.particle.io/guide/getting-started/examples/photon/#blink-an-led">Blink an LED</a> example.  You could use a <a href="https://www.adafruit.com/products/2268">NeoPixel Ring Kit</a> (requires a bit of easy soldering), or the <a href="https://www.particle.io/button">Internet Button</a> to add more LEDs, and modify the firmware to drive the ring instead of just the onboard LED.  With a ring, you could display the chance of rain for each hour separately, or other information.</p>
-
-<h1 id="troubleshooting:d680e8a854a7cbad6d490c445cba2eba">Troubleshooting</h1>
-
-<p>Are you seeing <code>&quot;~~~&quot;</code> with no values instead of <code>&quot;0~0~0~0&quot;</code>?  The Webhook subscription failed, double check the info in your Webhook .json file, specifically the API URL in your Webhook.  Make sure you can</p>
-
-<p>Having other issues?  <a href="mailto:hello@connected-displays.com">Let us know</a>, or post a question on the <a href="http://community.particle.io">Particle Community</a>.</p>
-
-<h1 id="conclusion:d680e8a854a7cbad6d490c445cba2eba">Conclusion</h1>
-
-<p>This tutorial gave you an overview of how to get started with the Photon, poll for information from an API, and display it locally.  If you followed along, maybe you built your first connected display project!  I hope it gave you some good experience and confidence to do another project, or make your own!</p>
-
-<p>Make sure to subscribe to our email list to find out when our next tutorial is posted.</p>
+<p><a href="/tutorial/photon-rain-led-tutorial/">Continue to Tutorial &gt;&gt;</a></p>
 
                 </div>
                 <hr>
