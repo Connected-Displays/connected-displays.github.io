@@ -16,10 +16,10 @@
       
       <guid>http://www.connected-displays.com/post/photon-rain-led-tutorial/</guid>
       <description>
-                    
-        <img src="http://www.connected-displays.com/post/photon-rain-led-tutorial/banner.png"/>
-I live in NYC and the weather can change suddenly. It may look nice outside my window when I&amp;rsquo;m getting ready to leave, but a storm could be inbound. I&amp;rsquo;d like to have something that tells me to &amp;ldquo;bring your umbrella&amp;rdquo; right next to the door. This is my first project done with the Particle Photon, and because I couldn&amp;rsquo;t find a comprehensive tutorial on this type of project, I wrote it up in tutorial form.
-      
+        
+          &lt;img src=&#34;http://www.connected-displays.com/post/photon-rain-led-tutorial/banner.png&#34;/&gt;
+        
+        I live in NYC and the weather can change suddenly. It may look nice outside my window when I&amp;rsquo;m getting ready to leave, but a storm could be inbound. I&amp;rsquo;d like to have something that tells me to &amp;ldquo;bring your umbrella&amp;rdquo; right next to the door. This is my first project done with the Particle Photon, and because I couldn&amp;rsquo;t find a comprehensive tutorial on this type of project, I wrote it up in tutorial form.
       </description>
     </item>
     
@@ -30,10 +30,10 @@ I live in NYC and the weather can change suddenly. It may look nice outside my w
       
       <guid>http://www.connected-displays.com/post/esp8266-weather-display/</guid>
       <description>
-                    
-        <img src="http://www.connected-displays.com/post/esp8266-weather-display/banner.jpg"/>
-I came across a tutorial in the Adafruit Learning System about a WiFi-connected Weather Display that caught my eye. The tutorial shows how to use Huzzah - Adafruit’s breakout for the ESP8266 WiFi module - to display weather data on an OLED screen. The project is listed as an intermediate level project, because it requires a PHP script to be running on a separate computer or Raspberry Pi to translate data from a weather forecast API to a format the microcontroller can handle.
-      
+        
+          &lt;img src=&#34;http://www.connected-displays.com/post/esp8266-weather-display/banner.jpg&#34;/&gt;
+        
+        I came across a tutorial in the Adafruit Learning System about a WiFi-connected Weather Display that caught my eye. The tutorial shows how to use Huzzah - Adafruit’s breakout for the ESP8266 WiFi module - to display weather data on an OLED screen. The project is listed as an intermediate level project, because it requires a PHP script to be running on a separate computer or Raspberry Pi to translate data from a weather forecast API to a format the microcontroller can handle.
       </description>
     </item>
     
@@ -44,11 +44,11 @@ I came across a tutorial in the Adafruit Learning System about a WiFi-connected 
       
       <guid>http://www.connected-displays.com/post/smart-stickers-product-preview/</guid>
       <description>
-                    
-        <img src="http://www.connected-displays.com/post/smart-stickers-product-preview/banner.jpg"/>
-&lt;p&gt;There’s an &lt;a href=&#34;https://www.indiegogo.com/projects/smart-sticker-customizable-real-time-display#/story&#34;&gt;Indiegogo campaign&lt;/a&gt; running for Smart Stickers - low cost bluetooth connected E-ink displays.  The product looks interesting, and I want this to become a real product, but I have some serious doubts about the campaign.&lt;/p&gt;
+        
+          &lt;img src=&#34;http://www.connected-displays.com/post/smart-stickers-product-preview/banner.jpg&#34;/&gt;
+        
+        &lt;p&gt;There’s an &lt;a href=&#34;https://www.indiegogo.com/projects/smart-sticker-customizable-real-time-display#/story&#34;&gt;Indiegogo campaign&lt;/a&gt; running for Smart Stickers - low cost bluetooth connected E-ink displays.  The product looks interesting, and I want this to become a real product, but I have some serious doubts about the campaign.&lt;/p&gt;
 
-      
       </description>
     </item>
     
@@ -59,10 +59,10 @@ I came across a tutorial in the Adafruit Learning System about a WiFi-connected 
       
       <guid>http://www.connected-displays.com/post/moodlight-product-preview/</guid>
       <description>
-                    
-        <img src="http://www.connected-displays.com/post/moodlight-product-preview/banner.jpg"/>
-Connor Nishijima created an online service that monitors Twitter for people expressing their emotions, and is in the middle of a Kickstarter campaign to show that data on a WiFi connected display. The twitter data is analyzed by a server, and you can see it working on the MoodLighting Stats page. The display polls the server for new data every second, and lights up nine LEDs to display the current state of emotions.
-      
+        
+          &lt;img src=&#34;http://www.connected-displays.com/post/moodlight-product-preview/banner.jpg&#34;/&gt;
+        
+        Connor Nishijima created an online service that monitors Twitter for people expressing their emotions, and is in the middle of a Kickstarter campaign to show that data on a WiFi connected display. The twitter data is analyzed by a server, and you can see it working on the MoodLighting Stats page. The display polls the server for new data every second, and lights up nine LEDs to display the current state of emotions.
       </description>
     </item>
     
@@ -73,10 +73,10 @@ Connor Nishijima created an online service that monitors Twitter for people expr
       
       <guid>http://www.connected-displays.com/post/lametric-time-initial-review/</guid>
       <description>
-                    
-        <img src="http://www.connected-displays.com/post/lametric-time-initial-review/banner.png"/>
-I was excited to learn about the LaMetric Time when it launched on Kickstarter in July 2014. I was lucky enough to be an early backer at the $119 price for a plug-in LaMetric (no battery), and I just opened it up and spent about an hour playing with it. LaMetric Time was interesting to me because of its pixelated LED display and potential for customization, displaying any data that&amp;rsquo;s available from the web.
-      
+        
+          &lt;img src=&#34;http://www.connected-displays.com/post/lametric-time-initial-review/banner.png&#34;/&gt;
+        
+        I was excited to learn about the LaMetric Time when it launched on Kickstarter in July 2014. I was lucky enough to be an early backer at the $119 price for a plug-in LaMetric (no battery), and I just opened it up and spent about an hour playing with it. LaMetric Time was interesting to me because of its pixelated LED display and potential for customization, displaying any data that&amp;rsquo;s available from the web.
       </description>
     </item>
     
@@ -87,10 +87,10 @@ I was excited to learn about the LaMetric Time when it launched on Kickstarter i
       
       <guid>http://www.connected-displays.com/post/raincheck-product-preview/</guid>
       <description>
-                    
-        <img src="http://www.connected-displays.com/post/raincheck-product-preview/banner.jpg"/>
-Raincheck is an umbrella stand that knows if it&amp;rsquo;s going to rain. It has a WiFi connected LED display to show you the chance of precipitation in the next eight hours, built into a beautiful hand-crafted umbrella stand. I had just finished my first Particle Photon project - an indicator to tell if it’s going to rain in the next four hours - when I saw Raincheck in my twitter feed.
-      
+        
+          &lt;img src=&#34;http://www.connected-displays.com/post/raincheck-product-preview/banner.jpg&#34;/&gt;
+        
+        Raincheck is an umbrella stand that knows if it&amp;rsquo;s going to rain. It has a WiFi connected LED display to show you the chance of precipitation in the next eight hours, built into a beautiful hand-crafted umbrella stand. I had just finished my first Particle Photon project - an indicator to tell if it’s going to rain in the next four hours - when I saw Raincheck in my twitter feed.
       </description>
     </item>
     
