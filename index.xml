@@ -290,7 +290,7 @@ void controlWeatherLed(int state) {
 &lt;li&gt;&lt;code&gt;query&lt;/code&gt; - delete, we aren&amp;rsquo;t including extra parameters in the URL&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;json&lt;/code&gt; - delete, we&amp;rsquo;re not including JSON with the request&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;auth&lt;/code&gt; - delete, the API doesn&amp;rsquo;t use authentication&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;responseTemplate&lt;/code&gt; - paste the Mustache template in quotes replacing &lt;code&gt;null&lt;/code&gt;: &lt;code&gt;&amp;quot;{{hourly.data.0.precipProbability}}~{{hourly.data.1.precipProbability}}~{{hourly.data.2.precipProbability}}~{{hourly.data.3.precipProbability}}&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;responseTemplate&lt;/code&gt; - paste the Mustache template in quotes replacing &lt;code&gt;null&lt;/code&gt; with &lt;code&gt;&amp;quot;{{hourly.data.0.precipProbability}}~{{hourly.data.1.precipProbability}}~{{hourly.data.2.precipProbability}}~{{hourly.data.3.precipProbability}}&amp;quot;&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;rejectUnauthorized&lt;/code&gt; - delete, only needed to ignore a bad SSL certification&lt;/li&gt;
 &lt;li&gt;Make sure the last line (responseTemplate), doesn&amp;rsquo;t end with a comma, or the file won&amp;rsquo;t parse&lt;/li&gt;
 &lt;/ul&gt;
@@ -567,15 +567,15 @@ unsigned long nextTimeout;
 
 &lt;h1 id=&#34;troubleshooting:d680e8a854a7cbad6d490c445cba2eba&#34;&gt;Troubleshooting&lt;/h1&gt;
 
-&lt;p&gt;Are you seeing &lt;code&gt;&amp;quot;~~~&amp;quot;&lt;/code&gt; with no values instead of &lt;code&gt;&amp;quot;0~0~0~0&amp;quot;&lt;/code&gt;?  The Webhook subscription failed, double check the info in your Webhook .json file, specifically the API URL in your Webhook.  Make sure you can&lt;/p&gt;
+&lt;p&gt;Are you seeing &lt;code&gt;&amp;quot;~~~&amp;quot;&lt;/code&gt; with no values instead of &lt;code&gt;&amp;quot;0~0~0~0&amp;quot;&lt;/code&gt;?  The Webhook subscription failed, double check the info in your Webhook .json file, specifically the API URL in your Webhook.  Make sure you can use the URL to get a response with data back from the Forecast.io API.&lt;/p&gt;
 
-&lt;p&gt;Having other issues?  &lt;a href=&#34;mailto:hello@connected-displays.com&#34;&gt;Let us know&lt;/a&gt;, or post a question on the &lt;a href=&#34;http://community.particle.io&#34;&gt;Particle Community&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Having other issues?  &lt;a href=&#34;mailto:hello@connected-displays.com&#34;&gt;Let me know&lt;/a&gt;, or post a question on the &lt;a href=&#34;http://community.particle.io&#34;&gt;Particle Community&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h1 id=&#34;conclusion:d680e8a854a7cbad6d490c445cba2eba&#34;&gt;Conclusion&lt;/h1&gt;
 
 &lt;p&gt;This tutorial gave you an overview of how to get started with the Photon, poll for information from an API, and display it locally.  If you followed along, maybe you built your first connected display project!  I hope it gave you some good experience and confidence to do another project, or make your own!&lt;/p&gt;
 
-&lt;p&gt;Make sure to subscribe to our email list to find out when our next tutorial is posted.&lt;/p&gt;
+&lt;p&gt;Make sure to subscribe to the Connected Displays email list to find out when our next tutorial is posted.&lt;/p&gt;
 </description>
     </item>
     
@@ -854,7 +854,7 @@ unsigned long nextTimeout;
 
 &lt;h3 id=&#34;louis-beaudoin:d680e8a854a7cbad6d490c445cba2eba&#34;&gt;Louis Beaudoin&lt;/h3&gt;
 
-&lt;p&gt;Louis is an electrical engineer with specialization in embedded programming and hardware design.  Before starting Pixelmatix, Louis co-founded and lead hardware product design for a   startup with a cloud-connected product that has grown into a sustainable business. Louis is a long-time contributor to open source, and created the first USB bootloader for the ATtiny series of microcontrollers, which made products like the Arduino Gemma and Adafruit Trinket possible.&lt;/p&gt;
+&lt;p&gt;Louis is an Electrical Engineer with specialization in embedded firmware and digital hardware design.  Before starting Pixelmatix, Louis co-founded and lead hardware product design for a startup with a cloud-connected product that has grown into a sustainable business. Louis is a long-time contributor to open source, and created the first USB bootloader for the ATtiny series of microcontrollers, which made products like the Arduino Gemma and Adafruit Trinket possible.&lt;/p&gt;
 
 &lt;h3 id=&#34;pixelmatix:d680e8a854a7cbad6d490c445cba2eba&#34;&gt;Pixelmatix&lt;/h3&gt;
 

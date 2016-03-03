@@ -120,7 +120,7 @@
                 <hr>
                 
                     
-                    <img class="img-responsive" src="http://www.connected-displays.com/tutorial/photon-rain-led-tutorial/banner.jpg" class="article-banner">
+                    <img class="img-responsive" src="http://www.connected-displays.com/tutorial/photon-rain-led-tutorial/banner.png" class="article-banner">
                     
                 <hr>
                 
@@ -386,7 +386,7 @@ void controlWeatherLed(int state) {
 <li><code>query</code> - delete, we aren&rsquo;t including extra parameters in the URL</li>
 <li><code>json</code> - delete, we&rsquo;re not including JSON with the request</li>
 <li><code>auth</code> - delete, the API doesn&rsquo;t use authentication</li>
-<li><code>responseTemplate</code> - paste the Mustache template in quotes replacing <code>null</code>: <code>&quot;{{hourly.data.0.precipProbability}}~{{hourly.data.1.precipProbability}}~{{hourly.data.2.precipProbability}}~{{hourly.data.3.precipProbability}}&quot;</code></li>
+<li><code>responseTemplate</code> - paste the Mustache template in quotes replacing <code>null</code> with <code>&quot;{{hourly.data.0.precipProbability}}~{{hourly.data.1.precipProbability}}~{{hourly.data.2.precipProbability}}~{{hourly.data.3.precipProbability}}&quot;</code></li>
 <li><code>rejectUnauthorized</code> - delete, only needed to ignore a bad SSL certification</li>
 <li>Make sure the last line (responseTemplate), doesn&rsquo;t end with a comma, or the file won&rsquo;t parse</li>
 </ul>
@@ -663,15 +663,15 @@ unsigned long nextTimeout;
 
 <h1 id="troubleshooting:d680e8a854a7cbad6d490c445cba2eba">Troubleshooting</h1>
 
-<p>Are you seeing <code>&quot;~~~&quot;</code> with no values instead of <code>&quot;0~0~0~0&quot;</code>?  The Webhook subscription failed, double check the info in your Webhook .json file, specifically the API URL in your Webhook.  Make sure you can</p>
+<p>Are you seeing <code>&quot;~~~&quot;</code> with no values instead of <code>&quot;0~0~0~0&quot;</code>?  The Webhook subscription failed, double check the info in your Webhook .json file, specifically the API URL in your Webhook.  Make sure you can use the URL to get a response with data back from the Forecast.io API.</p>
 
-<p>Having other issues?  <a href="mailto:hello@connected-displays.com">Let us know</a>, or post a question on the <a href="http://community.particle.io">Particle Community</a>.</p>
+<p>Having other issues?  <a href="mailto:hello@connected-displays.com">Let me know</a>, or post a question on the <a href="http://community.particle.io">Particle Community</a>.</p>
 
 <h1 id="conclusion:d680e8a854a7cbad6d490c445cba2eba">Conclusion</h1>
 
 <p>This tutorial gave you an overview of how to get started with the Photon, poll for information from an API, and display it locally.  If you followed along, maybe you built your first connected display project!  I hope it gave you some good experience and confidence to do another project, or make your own!</p>
 
-<p>Make sure to subscribe to our email list to find out when our next tutorial is posted.</p>
+<p>Make sure to subscribe to the Connected Displays email list to find out when our next tutorial is posted.</p>
 
                 </div>
                 <hr>
