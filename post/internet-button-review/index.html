@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <title>Internet Button Review | Connected Displays</title>
+
+    
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="/css/blog-home.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    
+    
+    
+
+    
+
+</head>
+
+<body>
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Connected Displays</a>
+            </div>
+            
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+
+                
+                
+                    <li>
+
+                        <a href="/tutorial"
+                        >
+
+                        
+                            <i class="fa fa-graduation-cap"></i>
+                        
+                        
+                        Tutorials
+                        </a>
+                    </li>
+                
+                    <li>
+
+                        <a href="/about"
+                        >
+
+                        
+                            <i class="fa fa-info-circle"></i>
+                        
+                        
+                        About
+                        </a>
+                    </li>
+                
+                    <li>
+
+                        <a href="mailto:hello@connected-displays.com"
+                         title="Send an email">
+
+                        
+                            <i class="fa fa-envelope"></i>
+                        
+                        
+                        Contact
+                        </a>
+                    </li>
+                
+                    <li>
+
+                        <a href="http://feeds.connected-displays.com"
+                        >
+
+                        
+                            <i class="fa fa-rss"></i>
+                        
+                        
+                        RSS
+                        </a>
+                    </li>
+                
+                </ul>
+            </div>
+            
+        </div>
+        
+    </nav>
+
+
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-8">
+
+                <h1>Internet Button Review</h1>
+                <p><span class="glyphicon glyphicon-time"></span> 
+                Posted on February 5, 2016 by Louis Beaudoin</p>
+                <hr>
+                
+                <div class="post">
+                    
+
+<p>The Internet Button is a product by Particle that combines their Photon WiFi dev board with a well designed adapter board containing several inputs (4x buttons and an accelerometer) and outputs (11 LEDs and a buzzer).  It&rsquo;s intended to be a good starting point for using the Photon, requiring no soldering to use.  The 11 LEDs arranged in a ring and buzzer make it a good platform for a connected display project.</p>
+
+<h2 id="packaging-and-contents:d680e8a854a7cbad6d490c445cba2eba">Packaging and Contents</h2>
+
+<p><img src="DraggedImage.png" alt="" /></p>
+
+<p>Particle really pays attention to their product packaging, and the Internet Button is no exception.  The Internet Button is round, and so is the packaging. The outer packaging looks like a container for storing spices, with a window that shows the front of the Internet Button, framing the Photon inside.  Inside is some custom cut foam to keep things in place, a nicely molded USB cable with the Particle logo, a Particle sticker, and a little card with a URL to find instructions to get started.  The “spice tin” makes for good storage, or a way protect the Internet Button and cable if you want to hack on the go.</p>
+
+<h2 id="design:d680e8a854a7cbad6d490c445cba2eba">Design</h2>
+
+<p><img src="DraggedImage-1.png" alt="" /></p>
+
+<p>I was really impressed with the Internet Button design except for one part which unfortunately we have to start with.  The clear plastic cover on the outside is designed to protect the Photon, but is just resting on top, unattached to the rest of the parts.  If you try to pick up the Internet Button by the cover, you will probably pick up just the cover and nothing else.  It really needs to snap on to the other parts or something, right now I just remove it and have to be careful not to touch the exposed Photon.  <a href="http://community.particle.io/t/printable-case-for-internet-button/16839/2">Another workaround</a> is to add double-stick tape to the edge of the clear plastic to make it stick to the rest of the button.</p>
+
+<p><img src="DraggedImage-2.png" alt="" /></p>
+
+<p>Removing the cover, you see a ring of contoured white plastic with the Photon in the center.  The white ring is translucent when the LEDs behind are lit, and has some Braille-like bumps for identifying three of the sides by feel.</p>
+
+<p>The plastic is held down by the Photon so to expose the full PCB you need to remove the Photon.  It’s held down pretty securely by the 24 pins, and takes some force to pry it up with a finger by the only exposed end.  I try to lift the PCB and not the USB connector to avoid damage.  You can use the use the board with and without the plastic cover, which is good if you want to use the Internet Button as a prototyping platform.</p>
+
+<p><img src="DraggedImage-3.png" alt="" /></p>
+
+<p>The top of the PCB has 11 LEDs arranged like a clock face with one missing where the USB cable plugs in.  The 12th LED can’t be placed because there’s not enough room to stack an LED and layer of white plastic while leaving room for the USB plug.  They were nice enough to leave the pads so if you really wanted to add the LED - and were OK with not being able to add the white plastic back on - you could solder one on yourself.  There is enough clearance for the USB cable to plug in above the 12th LED.  I feel like the missing LED is a missed opportunity.  It might have been possible to raise the Photon slightly using plastic as a spacer, which would leave room for an LED underneath.  The LED could be obscured by the USB plug, but could shine a bit through a <a href="http://shop.argentglobalnetwork.com/clear-micro-usb-data-sync-charger-cable-for-samsung-htc-motorola.html">clear-finish USB cable</a>.  Maybe Particle will consider this for a future version.</p>
+
+<p>Also on the top is the accelerometer, and some helpful silkscreen showing the accelerometer X/Y directions, and which Photon pins are used by the components on the board.  If you want to add to the board, there are seven free GPIO pins.  Many of the useful pins are taken up by the peripherals on the Internet Button board, so using hardware I2C isn’t an option and hardware SPI would need to be shared with the accelerometer.  The UART, some ADC inputs, one DAC output, and PWM outputs are available:</p>
+
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left"><strong>Pin</strong></td>
+<td align="left"><strong>Alt Functions</strong></td>
+</tr>
+
+<tr>
+<td align="left">D2</td>
+<td align="left">TIM3_CH2</td>
+</tr>
+
+<tr>
+<td align="left">D1</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td align="left">A1</td>
+<td align="left">ADC13</td>
+</tr>
+
+<tr>
+<td align="left">A0</td>
+<td align="left">ADC15</td>
+</tr>
+
+<tr>
+<td align="left">A4</td>
+<td align="left">ADC4/DAC</td>
+</tr>
+
+<tr>
+<td align="left">TX</td>
+<td align="left">UART_TX/TIM1_CH2</td>
+</tr>
+
+<tr>
+<td align="left">RX</td>
+<td align="left">UART_RX/TIM1_CH3</td>
+</tr>
+</tbody>
+</table>
+
+<p>The pinout is somewhat unfortunate as it limits the Internet Button’s potential as a prototyping platform.  The Buzzer output could probably have been moved to another PWM pin (e.g. D2) leaving both I2C pins free.  The second hardware SPI is blocked, but freeing it would be a tradeoff, either reducing the available ADC pins from 3 to 1 or taking up the two UART/PWM pins.</p>
+
+<p><img src="DraggedImage-4.png" alt="" /></p>
+
+<p>Flipping the PCB over, you see four buttons, the buzzer, and a little buffer to drive the first LED in the ring with 5V instead of the Photon’s 3.3V.  There are also pads where a JST-PH battery connector could go, and the female headers where the Photon attaches.  It’s easy to overlook, but there is also a hole in the center which can be used to add a screw for loosely mounting the Internet Button to a surface, e.g. if you wanted it mounted on the wall.  The buttons seem like a good choice, with nice resistance to avoid accidental pressing, and satisfying click when pressed.  I wish there were an actual JST-PH battery connector placed and not just pads.  The rest of the design lets you get started with a Photon project without having to do any soldering, but if you want to add a battery with removable connector, you have to make the jump to SMT soldering.  I think this could be added to a future version without increasing the cost significantly.  There’s no pinout silkscreen on the bottom of the board, which would have been helpful if you’re trying to add connections to the bottom of the board with the opaque diffuser placed on top.</p>
+
+<p><img src="DraggedImage-5.png" alt="" /></p>
+
+<p>It may seem like an insignificant part of the design, but the two 2x12 female headers where the Photon plugs in are what got me most excited about this product and made me decide to purchase it.  In other shields I’ve seen for the Photon the connectors are quite tall and raise the Photon about 8mm off the shield, which is fine if you’re prototyping but not if you actually want to use the board.  The SMT headers on the Internet Button are only a little over 5mm high and placing them on the bottom of the board doesn’t raise the Photon at all above the top of the board.  The extra row of connectors on each side is actually a bonus, as it allows you to plug in a strip of male headers or male jumper wires to either the front or back of the board for connecting up to another circuit or debugging equipment.  It’s a great connector solution and something I plan to use in the next shield I design, kudos to <a href="https://github.com/jenesaisdiq">the designer</a>.</p>
+
+<h2 id="software:d680e8a854a7cbad6d490c445cba2eba">Software</h2>
+
+<p>A great hardware design only goes so far without software to run on it, so how does that stack up?  Following <a href="http://particle.io/buttonstart">the link</a> in the tin takes you to a single page which quickly gets you started with connecting the Photon to WiFi and the Particle Cloud, then running some examples.</p>
+
+<p>The first few examples are basic and documented through the comments in the code.  They show you how to blink some LEDs, use the buttons, and use the accelerometer and are a good introduction to the hardware.</p>
+
+<p>The Internet example is where things start to get interesting, but the documentation falls short.  The <em>Internet</em> example lets you control the LED brightness and color using buttons on the photon, and listens for an API function to change the number of LEDs turned on over the internet.  The example links to a companion HTML file (containing mostly Javascript) on GitHub that can be viewed to connect to your Internet Button and control the number of LEDs, without much explanation of what to do with the file.  There’s no explanation of how to use the HTML file, which GitHub displays as source only.  I found two alternatives: download the html file and use your browser to open the local copy, or use a service like <a href="http://htmlpreview.github.io">GitHub Preview</a> to view the HTML content from GitHub instead of just the source.  Interacting with the Photon through Javascript is just one use case.  You could see what’s going on behind the scenes by calling the API directly, but this isn’t covered at all, and there isn’t even a link to the <a href="https://docs.particle.io/reference/api/">Cloud API docs</a>.  There is a tutorial for <a href="https://docs.particle.io/guide/getting-started/examples/photon/#control-leds-over-the-39-net">controlling a single LED</a> through Particle Cloud.  This would probably get me the information I need to interact with this example more, but I wish there were a similar tutorial focused on the Internet Button.</p>
+
+<p><img src="unspecified.jpeg" alt="" /></p>
+
+<p>Next up is a simple example to play tones on the buzzer.  The library has an easy API for this, playing combinations of notes and duration, which you can join together to make a song.</p>
+
+<p>Finally is a large example called <em>ReleaseFirmware</em> that combines a lot of features - nearly everything except the accelerometer - but again is lacking documentation.  There are a lot of comments, but at a glance it’s not clear what the app is supposed to do, or how to interact with it.  There is a recommendation to download <a href="http://particle.io/dev">Particle Dev</a> and with Dev installed, signed into Particle Cloud, and connected to the InternetButton device, you can interact with the example application without writing code.  The menu item <code>Particle-Show Cloud Functions</code> brings up a list of functions you can call.  You can easily find the arguments that the functions expect in the comments.  This example also uses <code>publish()</code>, but doesn’t introduce the function or explain what you can do with it.</p>
+
+<p><img src="DraggedImage-6.png" alt="" /></p>
+
+<p>After going through the examples and Internet Button guide, I’m left unsatisfied as the Internet Button isn’t doing anything useful on the Internet and the guide doesn’t give me any clue where to start to make it useful.  Going back to the <a href="https://www.particle.io/button">marketing page</a> for the Internet Button, I see IFTTT integration listed as a major feature if not a big component of the system, but it wasn’t brought up in the Internet Button guide.  There is an <a href="https://docs.particle.io/guide/tools-and-features/ifttt/">IFTTT Guide</a> in Particle Docs, and referencing this guide along with the <code>Publish()</code> and <code>Function()</code> calls in the <em>ReleaseFirmware</em> example I could probably get the Internet Button triggering and being triggered by IFTTT recipes.  This really should be included in the Internet Button guide as Particle pitches the product as “Press this button and something happens on the internet.”.</p>
+
+<h2 id="summary:d680e8a854a7cbad6d490c445cba2eba">Summary</h2>
+
+<p>The Internet Button is a well designed hardware platform that can be used for getting started with the Photon, interacting with or displaying information from the internet, and as a prototyping platform. It falls short in example software and documentation, but that is something that Particle hopefully will improve over time.</p>
+
+<p>Make sure you subscribe to the Connected Displays blog if you want to see more projects and tutorials using the Internet Button.</p>
+
+<hr />
+
+<p><small>
+References:</p>
+
+<ul>
+<li>Most photos are <a href="https://docs.particle.io/guide/tools-and-features/button/photon/">from</a> <a href="https://docs.particle.io/datasheets/photon-shields/#internet-button">Particle</a></li>
+</ul>
+
+<p></small></p>
+
+                </div>
+                <hr>
+
+            </div>
+
+            
+            <div class="col-md-4">
+                
+<link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+     
+     
+</style>
+<div id="mc_embed_signup" class="well">
+<form action="//pixelmatix.us8.list-manage.com/subscribe/post?u=aae3d71a06e588315ef49efd3&amp;id=6de8c12496" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll" class="input-group">
+    <label for="mce-EMAIL">Subscribe to our mailing list</label>
+    <input type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="email address" required>
+    
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_aae3d71a06e588315ef49efd3_6de8c12496" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default"></div>
+    </div>
+</form>
+</div>
+
+
+
+                
+
+                
+
+            </div>
+
+        </div>
+        
+
+        <hr>
+
+                <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &#xA9; 2016 Pixelmatix. All Rights Reserved.</p>
+                </div>
+                
+            </div>
+            
+        </footer>
+
+ 
+     </div>
+     
+    
+    <script src="/js/jquery.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script>$(function() { $('table').addClass('table table'); })</script>
+    
+</body>
+
+</html>
+
