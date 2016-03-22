@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <title>TrainLight Project | Connected Displays</title>
+
+    
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="/css/blog-home.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    
+    
+    
+
+    
+
+</head>
+
+<body>
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Connected Displays</a>
+            </div>
+            
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+
+                
+                
+                    <li>
+
+                        <a href="/tutorial"
+                        >
+
+                        
+                            <i class="fa fa-graduation-cap"></i>
+                        
+                        
+                        Tutorials
+                        </a>
+                    </li>
+                
+                    <li>
+
+                        <a href="/about"
+                        >
+
+                        
+                            <i class="fa fa-info-circle"></i>
+                        
+                        
+                        About
+                        </a>
+                    </li>
+                
+                    <li>
+
+                        <a href="mailto:hello@connected-displays.com"
+                         title="Send an email">
+
+                        
+                            <i class="fa fa-envelope"></i>
+                        
+                        
+                        Contact
+                        </a>
+                    </li>
+                
+                    <li>
+
+                        <a href="http://feeds.connected-displays.com"
+                        >
+
+                        
+                            <i class="fa fa-rss"></i>
+                        
+                        
+                        RSS
+                        </a>
+                    </li>
+                
+                </ul>
+            </div>
+            
+        </div>
+        
+    </nav>
+
+
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-8">
+
+                <h1>TrainLight Project</h1>
+                <p><span class="glyphicon glyphicon-time"></span> 
+                Posted on March 22, 2016 by Louis Beaudoin</p>
+                <hr>
+                
+                <div class="post">
+                    
+
+<p><a href="http://www.outriderindustries.com/trainlight/">TrainLight</a> is a display by Sean Savage that communicates public transport information at a glance.  The design assumes that the user already knows where they are going, and the public transport options to get there, and communicates just what they need to know (which bus is coming sooner) at a glance.  I really like this project because of it&rsquo;s simplicity and attractive way it displays the information.</p>
+
+<p>Not only is TrainLight a cool project, Sean wrote up a <a href="http://www.outriderindustries.com/trainlight-build-your-own/">great tutorial</a> on how to build your own.</p>
+
+<h3 id="electronics:d680e8a854a7cbad6d490c445cba2eba">Electronics</h3>
+
+<p>TrainLight gets updates from the internet using WiFi via a Particle Core, but you&rsquo;d want to use a cheaper and more powerful Photon if you&rsquo;re reproducing the project today.  Besides the Photon, you only need a strip of addressable LEDs, and a few parts to connect them together.  Because the display is always on, it needs an external power supply.</p>
+
+<p><img src="trainlight-circuit-sm.png" alt="" /></p>
+
+<h3 id="enclosure:d680e8a854a7cbad6d490c445cba2eba">Enclosure</h3>
+
+<p>The base for the enclosure is a block of Foam Core with a hole in it for the electronics, and the LED strip wrapped around the outside.  The foam and electronics don&rsquo;t need to be made to look pretty, as they are all covered by a canvas panel, and the LEDs project from behind the canvas onto the wall.</p>
+
+<p><img src="DraggedImage.png" alt="" /></p>
+
+<p>I like this enclosure as it&rsquo;s made with easy to source materials, and there are no fancy tools required.  It&rsquo;s a clean look after it&rsquo;s put together.</p>
+
+<h2 id="software:d680e8a854a7cbad6d490c445cba2eba">Software</h2>
+
+<p>TrainLight gets transit information from the NextBus API which supports a number of transit systems across the US and Canada.  There&rsquo;s a Ruby script that runs every 30 seconds to get data for eight transit stops and sends a summary message to TrainLight through the Particle Cloud.  Additionally the parser depends on a Node.js proxy server called <em>restbus</em> to translate the API data from its original XML to a restful JSON format that&rsquo;s easier to parse.  This complicates replicating the project - at least for me - as I don&rsquo;t currently have a server set up to run Node.js and Ruby apps, and with my electronics hardware and firmware background haven&rsquo;t deployed something like this before.</p>
+
+<p>The firmware is quite simple, and mostly just listens for the server to send the eight values representing minutes until each bus arrives, and then converts those values into colors to display on the LED strip.</p>
+
+<p>I took a look at the possibility of replacing the server and Ruby script with Webhooks.  Webhooks were made for JSON data, and the original NextBus feed is in XML.  There at least needs to be another service to translate the data to JSON, so at a minimum, the <em>restbus</em> proxy server needs to be running on a server somewhere.</p>
+
+<p>TrainLight checks eight transit feeds twice a minute.  Each feed would need its own Webhook as they each have a unique URL.  To have the same functionality using Webhooks, we would need to create eight unique Webhooks and trigger sixteen hooks per minute.  Particle limits the total number of Webhooks a user can create to twenty - so this one project would take up a good chunk of your total hooks.  Particle limits triggering to ten hooks per minute per device, not enough to reproduce the functionality.  Given these limits, using Webhooks doesn&rsquo;t seem like a good choice to replace the server completely.</p>
+
+<h2 id="suggestions-for-the-next-version:d680e8a854a7cbad6d490c445cba2eba">Suggestions for the Next Version</h2>
+
+<p>While I think the project is quite good as it is, I can think of a couple improvements for a second version.</p>
+
+<p>First, I would try to hide the power supply wire as it really takes away from the otherwise clean look of the project.  This isn&rsquo;t always a practical option as it pretty much requires putting a hole in the wall to route the power cord.</p>
+
+<p>Next, I would use FastLED instead of the Neopixel library.  FastLED would drive the LEDs at low brightness better than the Neopixel library, and gives options for changing up color palettes and helping with smooth fades between colors to make the project even more polished.</p>
+
+<hr />
+
+<p><small>
+<a href="https://www.hackster.io/savage/trainlight-9a424c">via Hackster</a>
+</small></p>
+
+                </div>
+                <hr>
+
+            </div>
+
+            
+            <div class="col-md-4">
+                
+<link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+     
+     
+</style>
+<div id="mc_embed_signup" class="well">
+<form action="//pixelmatix.us8.list-manage.com/subscribe/post?u=aae3d71a06e588315ef49efd3&amp;id=6de8c12496" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll" class="input-group">
+    <label for="mce-EMAIL">Subscribe to our mailing list</label>
+    <input type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="email address" required>
+    
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_aae3d71a06e588315ef49efd3_6de8c12496" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default"></div>
+    </div>
+</form>
+</div>
+
+
+
+                
+
+                
+
+            </div>
+
+        </div>
+        
+
+        <hr>
+
+                <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &#xA9; 2016 Pixelmatix. All Rights Reserved.</p>
+                </div>
+                
+            </div>
+            
+        </footer>
+
+ 
+     </div>
+     
+    
+    <script src="/js/jquery.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script>$(function() { $('table').addClass('table table'); })</script>
+    
+</body>
+
+</html>
+
