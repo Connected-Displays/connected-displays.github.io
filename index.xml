@@ -6,8 +6,22 @@
     <description>Recent content on Connected Displays</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 04 Mar 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 22 Mar 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://www.connected-displays.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>TrainLight Project</title>
+      <link>http://www.connected-displays.com/post/trainlight-project/</link>
+      <pubDate>Tue, 22 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.connected-displays.com/post/trainlight-project/</guid>
+      <description>
+        
+          &lt;img src=&#34;http://www.connected-displays.com/post/trainlight-project/banner.jpg&#34;/&gt;
+        
+        TrainLight is a display by Sean Savage that communicates public transport information at a glance. The design assumes that the user already knows where they are going, and the public transport options to get there, and communicates just what they need to know (which bus is coming sooner) at a glance. I really like this project because of it&amp;rsquo;s simplicity and attractive way it displays the information. Not only is TrainLight a cool project, Sean wrote up a great tutorial on how to build your own.
+      </description>
+    </item>
     
     <item>
       <title>New Tutorial: Umbrella Reminder with Particle Photon Webhooks</title>
