@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <title>Wake-Up Light Tutorial (Part 1) | Connected Displays</title>
+
+    
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="/css/blog-home.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    
+    
+    
+
+    
+
+</head>
+
+<body>
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Connected Displays</a>
+            </div>
+            
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+
+                
+                
+                    <li>
+
+                        <a href="/tutorial"
+                        >
+
+                        
+                            <i class="fa fa-graduation-cap"></i>
+                        
+                        
+                        Tutorials
+                        </a>
+                    </li>
+                
+                    <li>
+
+                        <a href="/about"
+                        >
+
+                        
+                            <i class="fa fa-info-circle"></i>
+                        
+                        
+                        About
+                        </a>
+                    </li>
+                
+                    <li>
+
+                        <a href="mailto:hello@connected-displays.com"
+                         title="Send an email">
+
+                        
+                            <i class="fa fa-envelope"></i>
+                        
+                        
+                        Contact
+                        </a>
+                    </li>
+                
+                    <li>
+
+                        <a href="http://feeds.connected-displays.com"
+                        >
+
+                        
+                            <i class="fa fa-rss"></i>
+                        
+                        
+                        RSS
+                        </a>
+                    </li>
+                
+                </ul>
+            </div>
+            
+        </div>
+        
+    </nav>
+
+
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-8">
+
+                <h1>Wake-Up Light Tutorial (Part 1)</h1>
+                <p><span class="glyphicon glyphicon-time"></span> 
+                Posted on April 19, 2016 by Louis Beaudoin</p>
+                <hr>
+                
+                    
+                    <img class="img-responsive" src="http://www.connected-displays.com/post/wakeup-light-tutorial-part1/Banner.png" class="article-banner">
+                    
+                <hr>
+                
+                <div class="post">
+                    
+
+<p>I made a simple device to help me get out of bed when I wake naturally in the morning.   At a glance, the device tells me when I&rsquo;m within 90 minutes - approximately <a href="http://www.des05.com/t/31685277/1276276959/70472197/0/107363/?5a6ba370=MDMwMDRGMkFBQTBENTkwNA%3d%3d&amp;2997ebdd=&amp;x=2e79f9a0" title="go here">one sleep cycle</a> - of my alarm going off.  If I wake up before my alarm and see the light, I know I&rsquo;m better off getting up instead of waiting for my alarm to go off in mid-sleep cycle and waking up groggy.  In this article is a tutorial on how to link a Google Calendar event with a Particle Photon, and an overview of Particle&rsquo;s Access Tokens.</p>
+
+<p>I&rsquo;m using the Wakeup Light instead of a traditional alarm clock, which would need to be lit up all night for me to see it, and wouldn&rsquo;t give me the clear direction to &ldquo;get up&rdquo; or &ldquo;keep sleeping&rdquo; at a glance.  This isn&rsquo;t a complete alarm clock replacement yet, I still use my phone as an audible backup alarm clock at night, but it&rsquo;s placed out of reach, not visible, and running the <a href="http://www.sleepcycle.com">Sleep Cycle app</a>.  Ideally I&rsquo;d just use Sleep Cycle to wake me up between sleep cycles, but I found I didn&rsquo;t trust that the alarm was going off between cycles after trying it a few times.  It&rsquo;s easy for me to trust that I&rsquo;m between sleep cycles if my eyes are open and I&rsquo;m looking at a dimly lit LED.</p>
+
+<p>I have a &ldquo;Morning Routine&rdquo; event in my calendar that I can use as a timestamp for when I need to wake up.  The overall problem seems really simple, just turn an LED off 90 minutes before the start of a calendar event, and turn it off sometime after the event starts.  I figured one of the Web Automation Services like IFTTT could handle this task, and started by looking at the IFTTT <a href="https://ifttt.com/google_calendar">Google Calendar Triggers</a>.  There&rsquo;s a trigger called &ldquo;Event from search starts&rdquo; that fires within 15 minutes of an event starting time.  The 15 minutes wasn&rsquo;t flexible, and I needed a trigger at least 90 minutes before.  I could work around this by creating a new event on my calendar for &ldquo;Wakeup&rdquo;, but  that&rsquo;s not ideal.</p>
+
+<p>My next stop was Zapier, which I had used before, but never with a Particle device.  <a href="https://zapier.com/zapbook/google-calendar/">Zapier</a> has a more flexible &ldquo;Event Start&rdquo; Trigger, but no Particle integration.  Someone had already figured out how to make Zapier send a message to a Particle device, and <a href="https://community.particle.io/t/connecting-apis-to-spark-cloud-without-hosting-your-own-middleware-web-app/3101">wrote up a tutorial</a>.</p>
+
+<p>With that I was ready to get started on the project.  I chose an Internet Button for the hardware, as it has a ring of LEDs, enclosure, and I could use the buttons and buzzer to make a more full featured alarm clock if I find I want this in the future, but I made the code work with a plain Photon as well, using the Blue LED.</p>
+
+<h2 id="access-tokens:d680e8a854a7cbad6d490c445cba2eba">Access Tokens</h2>
+
+<p>Setting up the Zapier rule - they call it a &ldquo;Zap&rdquo; - is quite easy, but depends on having an access token for your Particle account, so let&rsquo;s get that first.  Particle has an <a href="https://docs.particle.io/guide/how-to-build-a-product/authentication/#access-tokens">overview of Access Tokens</a> but it&rsquo;s in their &ldquo;How to Build a Product&rdquo; guide, mixed in a with a lot of irrelevant information about &ldquo;customers&rdquo; and I found it confusing.  I&rsquo;ll cover just what is needed to make your own project.</p>
+
+<p>From the Particle Guide: &ldquo;An access token is a special code that is tied to a Particle [user], that allows reading data from and sending commands to that person&rsquo;s device(s).&rdquo;  You need to give Zapier an access token so it is allowed to send a message to the wakeup light.</p>
+
+<p>When you open Particle Build, you can easily see an access token in the <em>Settings</em> tab.  This token never expires, but if you press the <em>Reset Token</em> button it will be removed and replaced with another number.  If you use this to give apps permission to access your Particle account, and you press the button - even accidentally - you need to update all the apps to use the new Access Token.  I don&rsquo;t think it&rsquo;s a good choice for this project.</p>
+
+<p><img src="DraggedImage.png" alt="" /></p>
+
+<p>You can manage your access tokens through the <a href="https://docs.particle.io/reference/api/#authentication">Particle API</a>.  First, let&rsquo;s see what access tokens are already in your account.  Run this from the command line and replace <code>username</code> and <code>password</code> with your Particle account&rsquo;s username and password.</p>
+
+<p><code>curl https://api.spark.io/v1/access_tokens -u username:password</code></p>
+
+<p>You might be surprised at how many access tokens are in your account.  I had more than 30, mostly because I often switch between Particle CLI accounts, and each new CLI login seems to generate a new access token.</p>
+
+<p>We should create a new access token to use in our Zapier link.  You&rsquo;ll have to make a choice of convenience versus security here.  By default, access tokens expire in 90 days to limit exposure from someone or a service getting access to your devices.  This might be fine for an application where we&rsquo;d get a notification that our credentials expired and where we could login again easily.  Once I set up the Zapier rule, I want it to work with no maintenance.  I&rsquo;m going to set the access token to never expire (<code>expires_in=0</code>), so I don&rsquo;t need to refresh the token.  From the command line, run the following command replacing the example username and password.</p>
+
+<p><code>curl https://api.particle.io/oauth/token -u particle:particle -d expires_in=0 -d grant_type=password -d username=joe@example.com -d password=SuperSecret</code></p>
+
+<p>You should see a response with an access token, make sure you copy the token somewhere safe so you can remember this access token was set up for Zapier:</p>
+
+<pre><code>{
+  &quot;token_type&quot;: &quot;bearer&quot;,
+  &quot;access_token&quot;: &quot;45677890abcdef012345677890abcdef12345678&quot;,
+  &quot;expires_in&quot;: 0,
+  &quot;refresh_token&quot;: &quot;012345677890abcdef012345677890abcdef1234t&quot;
+}
+</code></pre>
+
+<h2 id="zapier-setup:d680e8a854a7cbad6d490c445cba2eba">Zapier Setup</h2>
+
+<p>Zapier lets you set the &ldquo;Event Start&rdquo; trigger to send a message an arbitrary amount of time before the event start.  We could set it to send the alarm 90 minutes before the event start.  In the simplest version of the light, it could turn on when it gets the message from Zapier, and be hardcoded to turn off 90 minutes later, when my backup alarm goes off.  This is pretty inflexible, I&rsquo;d rather make the firmware so it gets a message containing the time the light should turn on, and the time the light should turn off so I could use the same firmware for another application.  The actual event can be scheduled in advance of the light going on or off, so if there&rsquo;s a delay in Zapier receiving the event, or triggering the light, there&rsquo;s some cushion so the light can still turn on at the right time.</p>
+
+<p>You can use the Zapier Free plan for this project.  The Free plan supports 100 Tasks/month, and we should have a maximum of 31 tasks in a month if the &ldquo;Morning Routine&rdquo; event is in the calendar once daily.  Zaps run every 15 minutes on the Free plan, so we should add some padding to the 90 minute wakeup time so the Zap can run before the light is supposed to turn on.</p>
+
+<h3 id="setup-google-calendar-trigger:d680e8a854a7cbad6d490c445cba2eba">Setup Google Calendar Trigger</h3>
+
+<p>In Zapier, go to &ldquo;Make a Zap&rdquo;, choose Google Calendar, and the &ldquo;Event Start&rdquo; trigger.  Connect your Google Calendar account, press the Test button to make sure it works, then &ldquo;Save and Continue&rdquo; to setup the trigger.</p>
+
+<p>Select your calendar, the time before the event (120 minutes = 90 minutes plus some padding), and the search terms that will bring up the event, &ldquo;Morning Routine&rdquo;.  Press &ldquo;Continue&rdquo;.</p>
+
+<p><img src="DraggedImage-1.png" alt="" /></p>
+
+<p>The next page will always say &ldquo;Test Successful&rdquo; as long as it can reach your calendar.  We need to look more carefully at the test to make sure it&rsquo;s working.  Create a new event called &ldquo;Morning Routine&rdquo; in your Google Calendar and set it to start within the next 120 minutes.  On the &ldquo;Test Google Calendar&rdquo; screen, press &ldquo;Re-test Google Calendar&rdquo;, then &ldquo;Fetch and Continue&rdquo;.  Take a look at the event details, and make sure they match the &ldquo;Morning Routine&rdquo; event on the calendar.  If Zapier can&rsquo;t find the event in your calendar, it will still say &ldquo;Test Successful&rdquo;, but the event details will be a for a dummy event called &ldquo;Zapier Party&rdquo;.  Once you&rsquo;re able to load the Morning Routine event from your calendar, press Continue to set up the next part of the rule.</p>
+
+<p><img src="DraggedImage-2.png" alt="" /></p>
+
+<h3 id="setup-particle-function:d680e8a854a7cbad6d490c445cba2eba">Setup Particle Function</h3>
+
+<p>For the &ldquo;Action App&rdquo;, there&rsquo;s no Particle App, so we&rsquo;ll use a generic Webhooks App instead.  We&rsquo;re going to do a POST to trigger a <a href="https://docs.particle.io/reference/firmware/photon/#particle-function-">Particle Function</a>.</p>
+
+<p>You can call a function by doing a POST with arguments <a href="https://docs.particle.io/reference/api/#call-a-function">from the command line</a>.  You need the Device ID for your Photon, which you can get from Particle Build in the Devices tab.  We&rsquo;ll call the function &ldquo;wakeup&rdquo;, and we got an access token earlier.  With all those pieces of info, you can edit this example request.</p>
+
+<p><code>curl https://api.particle.io/v1/devices/0123456789abcdef01234567/wakeup -d arg=&quot;test message&quot; -d access_token=1234</code></p>
+
+<p>This simple sketch exposes the &ldquo;wakeup&rdquo; function, and will blink the LEDs and print out the message it receives over USB when you call the function.  Program your Photon with the sketch, and when you run the <code>curl</code> command, your Photon should turn its LEDs on briefly, and print out <code>wakeup: &quot;test message&quot;</code> over USB.  Make sure you can see your Photon receiving &ldquo;test message&rdquo; before continuing.</p>
+
+<div id="gist300">
+<style type="text/css"> 
+#gist300 .gist .blob-wrapper.data {
+   max-height:300px;
+   overflow:auto;
+}
+</style>
+<script src="https://gist.github.com/embedded-creations/8218d5c7da6bd6e093537e840db4434e.js"> </script>
+</div>
+
+<h3 id="setup-webhooks-action-app:d680e8a854a7cbad6d490c445cba2eba">Setup Webhooks Action App</h3>
+
+<p>Start setting up the Action App by choosing &ldquo;Webhooks by Zapier&rdquo; app, and the POST Action.</p>
+
+<p><img src="DraggedImage-3.png" alt="" /></p>
+
+<p>We&rsquo;ll fill in the same info used in the <code>curl</code> command here.  It&rsquo;s obvious where the URL goes, but the access token needs to go into a key-value pair in the Data section.  The key is <code>access_token</code>, and the value is the token itself.  Create another key-value pair with key <code>args</code>.  Instead of &ldquo;test message&rdquo;, we&rsquo;ll send some useful data instead.  For the value, use the dropdown to select the <code>Event Begins</code> timestamp from the calendar event in Step 1, followed by <code>,90</code> (no spaces!) so we can tell our sketch that we want the light to go on 90 minutes before the event begins.</p>
+
+<p><img src="DraggedImage-4.png" alt="" /></p>
+
+<p>Press Continue and you&rsquo;ll see &ldquo;Test Successful&rdquo;, but ignore that and press &ldquo;Re-Test&rdquo; to get it to actually test.  You&rsquo;ll see a screen with what is going to be sent to the Photon, and <code>args</code> should look something like this:</p>
+
+<p><code>2016-04-12T12:45:00-04:00,90</code></p>
+
+<p>If you press &ldquo;Create &amp; Continue&rdquo;, the Photon should receive the <code>args</code> string and print it out over USB.  At this point, you could press &ldquo;Finish&rdquo; and enable the Zap, but staying on the test screen is useful to help with testing firmware as we finish up the sketch.</p>
+
+<h2 id="firmware:d680e8a854a7cbad6d490c445cba2eba">Firmware</h2>
+
+<p>I thought the firmware would be quite simple, but needed to learn a lot about handling time on the Photon before I could get the functionality I wanted.  Particle has a <a href="https://docs.particle.io/reference/firmware/photon/#timestr-">Time library</a> but no functions for parsing a timestamp in the ISO 8601 format that Google Calendar sends for Event Start.</p>
+
+<p>I found a C standard library function that <a href="http://www.gnu.org/software/libc/manual/html_node/Low_002dLevel-Time-String-Parsing.html">converts a timestamp string</a> to a <code>tm</code> structure, and another to <a href="http://www.cplusplus.com/reference/ctime/mktime/">convert a <code>tm</code> structure</a> to the <a href="http://www.cplusplus.com/reference/ctime/time_t/"><code>time_t</code></a> type that Particle uses in the Time library.  One detail that stumped me for a bit is that <code>strptime()</code> doesn&rsquo;t parse time zone offsets though the documentation says it does.  I had to write my own time zone conversion code.  After converting, I have the timestamp for Event Start in UTC and <code>time_t</code> type - the same format as the Particle Time library - so it&rsquo;s easy to do comparisons.  The rest of the program is simple: turning on the LEDs when they&rsquo;re supposed to be on, and off when they&rsquo;re supposed to be off.</p>
+
+<div id="gist300">
+<style type="text/css"> 
+#gist300 .gist .blob-wrapper.data {
+   max-height:300px;
+   overflow:auto;
+}
+</style>
+<script src="https://gist.github.com/embedded-creations/cd47646f5b9233953f0fac7e0e310a56.js"> </script>
+</div>
+
+<h2 id="test:d680e8a854a7cbad6d490c445cba2eba">Test</h2>
+
+<p>We can test that the light is working by enabling the Zap and forcing it to run after making some fake events in Google Calendar</p>
+
+<p><img src="DraggedImage-5.png" alt="" /></p>
+
+<ul>
+<li>Create &ldquo;Morning Routine&rdquo; event in Google Calendar, but outside of next 120 minutes - should see nothing happen on the light and USB messages</li>
+<li>Move the event between 90-120 minutes from now, run the Zap - should see timestamps over USB, but no LED on yet</li>
+<li>Move the event within 90 minutes, run the Zap - see LEDs turn on</li>
+<li>Move the event within 15 minutes, run the Zap - see LEDs turn on, then wait, LEDs should turn off within 30-45 minutes (30 minutes after event starts</li>
+</ul>
+
+<h2 id="next-steps:d680e8a854a7cbad6d490c445cba2eba">Next Steps</h2>
+
+<p>This minimal version of the wakeup light works, but there are a few improvements I already have in mind, and I&rsquo;ll probably have more after starting to use it daily.</p>
+
+<ul>
+<li>The timezone calculation only processes full hours, ignoring time zones with partial-hour offsets (which I was surprised to find is <a href="http://www.timeanddate.com/time/time-zones-interesting.html">used in quite a few places</a>)</li>
+<li>The status LED is always on, and is bright enough to be annoying in a dark room.  I&rsquo;m just covering it up for now, but would like to turn it off unless I want to see the status (e.g. while pressing a button)</li>
+<li>Running from a battery instead of requiring the device to be plugged in through USB would be a nice improvement</li>
+<li>Less geeky enclosure - I&rsquo;m thinking about hiding the light in a candle</li>
+<li>Battery power to remove the power cord and declutter my nightstand</li>
+<li>Instead of hard-coding the delay to turn off the light, pass a parameter as part of the message</li>
+</ul>
+
+<p>I&rsquo;ll continue to write about this project as I make improvements, please subscribe to get the latest posts!</p>
+
+<hr />
+
+<p><small>
+LED icon is LED by jon trillana from the Noun Project
+</small></p>
+
+                </div>
+                <hr>
+
+            </div>
+
+            
+            <div class="col-md-4">
+                
+<link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+     
+     
+</style>
+<div id="mc_embed_signup" class="well">
+<form action="//pixelmatix.us8.list-manage.com/subscribe/post?u=aae3d71a06e588315ef49efd3&amp;id=6de8c12496" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll" class="input-group">
+    <label for="mce-EMAIL">Subscribe to our mailing list</label>
+    <input type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="email address" required>
+    
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_aae3d71a06e588315ef49efd3_6de8c12496" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default"></div>
+    </div>
+</form>
+</div>
+
+
+
+                
+
+                
+
+            </div>
+
+        </div>
+        
+
+        <hr>
+
+                <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &#xA9; 2016 Pixelmatix. All Rights Reserved.</p>
+                </div>
+                
+            </div>
+            
+        </footer>
+
+ 
+     </div>
+     
+    
+    <script src="/js/jquery.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script>$(function() { $('table').addClass('table table'); })</script>
+    
+</body>
+
+</html>
+
