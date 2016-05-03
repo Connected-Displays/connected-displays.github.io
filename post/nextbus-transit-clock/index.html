@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <title>NextBus Transit Clock | Connected Displays</title>
+
+    
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="/css/blog-home.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    
+    
+    
+
+    
+
+</head>
+
+<body>
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Connected Displays</a>
+            </div>
+            
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+
+                
+                
+                    <li>
+
+                        <a href="/tutorial"
+                        >
+
+                        
+                            <i class="fa fa-graduation-cap"></i>
+                        
+                        
+                        Tutorials
+                        </a>
+                    </li>
+                
+                    <li>
+
+                        <a href="/about"
+                        >
+
+                        
+                            <i class="fa fa-info-circle"></i>
+                        
+                        
+                        About
+                        </a>
+                    </li>
+                
+                    <li>
+
+                        <a href="mailto:hello@connected-displays.com"
+                         title="Send an email">
+
+                        
+                            <i class="fa fa-envelope"></i>
+                        
+                        
+                        Contact
+                        </a>
+                    </li>
+                
+                    <li>
+
+                        <a href="http://feeds.connected-displays.com"
+                        >
+
+                        
+                            <i class="fa fa-rss"></i>
+                        
+                        
+                        RSS
+                        </a>
+                    </li>
+                
+                </ul>
+            </div>
+            
+        </div>
+        
+    </nav>
+
+
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-8">
+
+                <h1>NextBus Transit Clock</h1>
+                <p><span class="glyphicon glyphicon-time"></span> 
+                Posted on May 3, 2016 by Louis Beaudoin</p>
+                <hr>
+                
+                    
+                    <img class="img-responsive" src="http://www.connected-displays.com/post/nextbus-transit-clock/banner.jpg" class="article-banner">
+                    
+                <hr>
+                
+                <div class="post">
+                    
+
+<p>Phillip Burgess wrote a tutorial on the Adafruit Learning System about making a <a href="https://learn.adafruit.com/personalized-esp8266-transit-clock?view=all">personalized NextBus Transit Clock</a>.  This project is very similar to the <a href="http://www.connected-displays.com/post/trainlight-project/">TrainLight project</a> I wrote about recently, but is implemented in a very different way.  Phillip&rsquo;s tutorial uses 7-segment displays and clear labels for the bus route vs the abstract lights in TrainLight, and doesn&rsquo;t require a proxy server or the Particle Cloud.</p>
+
+<p>The choice to use clear digits for the wait time makes sense when you look at the project photo above.  The routes near Phillip&rsquo;s home run infrequently, with 30-60 minutes between stops.  Bus service like this requires a bit more planning to use, so knowing the actual time to the next bus, and the bus after that is useful.</p>
+
+<h2 id="electronics:d680e8a854a7cbad6d490c445cba2eba">Electronics</h2>
+
+<p><img src="leds_circuit-diagram.png" alt="" />
+The NextBus Transit Clock uses the ESP8266 WiFi microcontroller on an <a href="https://www.adafruit.com/products/2821">Adafruit Feather HUZZAH</a> dev board.  This is a few dollars cheaper than a Particle Photon, but doesn&rsquo;t include access to the Particle Cloud.  The ESP8266 can be programmed with a Lua script, or with C++ code using the Arduino IDE.  The program must be uploaded through a USB cable and I didn&rsquo;t see any support for uploading through WiFi.  The Feather HUZZAH board has support for using a Lipo battery including a charger circuit which is handy for a portable project, but not used in this case.  The ESP8266 has limited GPIO pins, but this project only needs two pins to connect to the displays.</p>
+
+<p>The displays used are the <a href="https://www.adafruit.com/products/1002">Adafruit 0.56&rdquo; 4-Digit 7-Segment Display with I2C Backpack</a>, which cost between $10-$12 each depending on the LED color.  The backpack takes care of refreshing the LEDs, and all the microcontroller has to do to update the time is send I2C messages telling the backpack what segments to turn on.  I2C is a good choice for connecting the backpacks as the four displays can be chained together easily using just two pins from the micro.</p>
+
+<h2 id="software:d680e8a854a7cbad6d490c445cba2eba">Software</h2>
+
+<p>TrainLight uses a proxy server to convert the NextBus XML data to JSON.  The NextBus Transit Clock skips all this and uses an open source <a href="https://github.com/adafruit/TinyXML/">TinyXML Library</a> that runs on the ESP8266, so no external server is required.  This is impressive as parsing XML is a challenge with limited memory on a microcontroller, but the TinyXML Library with Phillip&rsquo;s changes takes care of this.</p>
+
+<p>Phillip made it very easy to customize the sketch.  There&rsquo;s a python script you can run on your computer that prompts you for the transit agency, route number, direction, and stop, then outputs code you can paste directly into the Arduino sketch.  The only other config you need to do is change the WiFi network name and password to match your network.</p>
+
+<h2 id="enclosure:d680e8a854a7cbad6d490c445cba2eba">Enclosure</h2>
+
+<p>￼￼<img src="leds_transfer3.jpg" alt="" />
+The tutorial encourages you to customize the enclosure to your needs, but provides all the details of the enclosure Phillip made.  The example enclosure uses 3D printing for the back and sides with mounting for the electronics, and laser cut acrylic for the front.  The bus route and direction labels were applied to the acrylic using toner transfer paper, which looks nice in the photo and I&rsquo;m sure looks even better in person.</p>
+
+<h2 id="suggestions-for-v2:d680e8a854a7cbad6d490c445cba2eba">Suggestions for V2</h2>
+
+<p>While Phillip encourages customizing the enclosure to meet your needs, you&rsquo;re left to figure that out on your own with the reference design requiring a laser printer, 3D printer, and toner transfer kit.  I liked the &ldquo;no tools and low budget&rdquo; approach that TrainLight took, to make it easy for anyone to reproduce the enclosure.</p>
+
+<p>The NextBus Transit Clock project is a follow-up to <a href="https://learn.adafruit.com/nextbus-transit-clock-for-raspberry-pi/overview">another NextBus clock</a> using a Raspberry Pi and a LED matrix.  The &gt;$40 spent on four 7-segment backpacks could be used for a <a href="https://www.adafruit.com/products/420">16x32</a> or <a href="https://www.adafruit.com/products/1484">32x32</a> RGB LED Matrix display instead, which could be used for not only display of transit times, but also more information using text, graphics, or color coding.  Phillip designed this clock to be more subdued than his original scrolling matrix transit clock, but a matrix display can be used to present information in a subdued way.</p>
+
+<p>Phillip has a lot of other awesome projects <a href="https://learn.adafruit.com/users/pburgess">on the Adafruit Learning System</a>, I encourage you to check out what else he has and keep an eye out for his new projects.</p>
+
+                </div>
+                <hr>
+
+            </div>
+
+            
+            <div class="col-md-4">
+                
+<link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+     
+     
+</style>
+<div id="mc_embed_signup" class="well">
+<form action="//pixelmatix.us8.list-manage.com/subscribe/post?u=aae3d71a06e588315ef49efd3&amp;id=6de8c12496" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll" class="input-group">
+    <label for="mce-EMAIL">Subscribe to our mailing list</label>
+    <input type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="email address" required>
+    
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_aae3d71a06e588315ef49efd3_6de8c12496" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default"></div>
+    </div>
+</form>
+</div>
+
+
+
+                
+
+                
+
+            </div>
+
+        </div>
+        
+
+        <hr>
+
+                <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &#xA9; 2016 Pixelmatix. All Rights Reserved.</p>
+                </div>
+                
+            </div>
+            
+        </footer>
+
+ 
+     </div>
+     
+    
+    <script src="/js/jquery.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script>$(function() { $('table').addClass('table table'); })</script>
+    
+</body>
+
+</html>
+
