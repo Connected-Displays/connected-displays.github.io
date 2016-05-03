@@ -6,8 +6,22 @@
     <description>Recent content in Posts on Connected Displays</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 19 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 03 May 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://www.connected-displays.com/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>NextBus Transit Clock</title>
+      <link>http://www.connected-displays.com/post/nextbus-transit-clock/</link>
+      <pubDate>Tue, 03 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.connected-displays.com/post/nextbus-transit-clock/</guid>
+      <description>
+        
+          &lt;img src=&#34;http://www.connected-displays.com/post/nextbus-transit-clock/banner.jpg&#34;/&gt;
+        
+        Phillip Burgess wrote a tutorial on the Adafruit Learning System about making a personalized NextBus Transit Clock. This project is very similar to the TrainLight project I wrote about recently, but is implemented in a very different way. Phillip&amp;rsquo;s tutorial uses 7-segment displays and clear labels for the bus route vs the abstract lights in TrainLight, and doesn&amp;rsquo;t require a proxy server or the Particle Cloud. The choice to use clear digits for the wait time makes sense when you look at the project photo above.
+      </description>
+    </item>
     
     <item>
       <title>Wake-Up Light Tutorial (Part 1)</title>
